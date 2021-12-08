@@ -28,6 +28,7 @@ import SweetAlert from 'src/components/Dashboard/Views/Components/SweetAlert.vue
 import Notifications from 'src/components/Dashboard/Views/Components/Notifications.vue'
 import Icons from 'src/components/Dashboard/Views/Components/Icons.vue'
 import Typography from 'src/components/Dashboard/Views/Components/Typography.vue'
+import Kakao from 'src/components/Dashboard/Views/Pages/DB/Kakao';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -184,6 +185,19 @@ let examplesMenu = {
   ]
 };
 
+let DBMenu = {
+  path: '/db',
+  component: DashboardLayout,
+  name: 'DB',
+  children: [
+    {
+      path: 'kakao-consults',
+      name: 'Kakao',
+      components: { default: Kakao }
+    }
+  ],
+}
+
 const routes = [
   {
     path: '/',
@@ -207,6 +221,7 @@ const routes = [
   forgotPassword,
   resetPassword,
   examplesMenu,
+  DBMenu,
   {
     path: '/admin',
     component: DashboardLayout,

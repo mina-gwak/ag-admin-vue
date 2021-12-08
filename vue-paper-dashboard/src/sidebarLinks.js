@@ -10,7 +10,7 @@ export default [
     children: [
       {
         name: '카카오톡',
-        path: '/examples/user-profile',
+        path: '/db/kakao-consults',
       },
       {
         name: '견적문의',
