@@ -27,7 +27,7 @@ export default {
 	name: 'Table',
 	props: {
 		title: String,
-		data: Object,
+		data: Array,
 		index: Array,
 	},
 };
