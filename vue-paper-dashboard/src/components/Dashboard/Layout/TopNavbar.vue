@@ -23,25 +23,6 @@
     </div>
 
     <template slot="navbar-menu">
-      <a
-        href="https://vue-paper-dashboard-laravel.creative-tim.com/documentation"
-        target="_blank"
-        class="btn btn-danger mt-0 mr-2"
-        style="background-color: #6bd098"
-        id="docs"
-      >
-        <i class="fas fa-file-alt mr-2"></i>Documentation</a
-      >
-
-      <a
-        href="https://www.creative-tim.com/product/vue-paper-dashboard-laravel"
-        target="_blank"
-        class="btn btn-danger mt-0 mr-2"
-        style="background-color: #ef8157"
-        id="downb"
-      >
-        <i class="fas fa-download mr-2"></i>Download now</a
-      >
 
       <form>
         <div class="input-group no-border">

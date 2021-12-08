@@ -188,7 +188,7 @@ const routes = [
   {
     path: '/',
     component: DashboardLayout,
-    redirect: '/admin/overview',
+    // redirect: '/admin/overview',
     children: [
       {
         path: 'charts',

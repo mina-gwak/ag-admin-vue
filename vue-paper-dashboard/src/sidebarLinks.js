@@ -1,142 +1,88 @@
 export default [
   {
-    name: 'Dashboard',
-    icon: 'nc-icon nc-bank',
-    path: '/admin/overview'
+    name: 'Main',
+    icon: 'nc-icon nc-shop',
+    path: '/admin/overview',
   },
   {
-    name: 'Examples (API)',
-    icon: 'nc-icon nc-book-bookmark',
+    name: 'DB',
+    icon: 'nc-icon nc-cloud-download-93',
     children: [
       {
-        name: 'User Profile',
+        name: '카카오톡',
         path: '/examples/user-profile',
       },
       {
-        name: 'User Management',
+        name: '견적문의',
         path: '/examples/user-management/list-users',
       },
-    ]
+      {
+        name: '상세견적',
+        path: '/examples/user-profile',
+      },
+      {
+        name: '방문상담',
+        path: '/examples/user-management/list-users',
+      },
+    ],
   },
   {
-    name: 'Pages',
-    icon: 'nc-icon nc-book-bookmark',
+    name: '메인화면',
+    icon: 'nc-icon nc-tv-2',
     children: [
       {
-        name: 'Timeline',
-        path: '/pages/timeline'
+        name: '슬라이드',
+        path: '/pages/timeline',
       },
       {
-        name: 'User Profile',
-        path: '/pages/user'
+        name: '상품리스트',
+        path: '/pages/user',
+      },
+    ],
+  },
+  {
+    name: '간편견적',
+    icon: 'nc-icon nc-paper',
+    children: [{
+      name: '즉시출고',
+      path: '/components/buttons',
+    },
+      {
+        name: '프로모션',
+        path: '/components/grid-system',
       },
       {
-        name: 'Lock',
-        path: '/lock'
-      }
-    ]
+        name: '전차종견적',
+        path: '/components/panels',
+      }],
   },
   {
-    name: 'Components',
-    icon: 'nc-icon nc-layout-11',
+    name: 'Best Selling',
+    icon: 'nc-icon nc-trophy',
     children: [{
-      name: 'Buttons',
-      path: '/components/buttons'
+      name: 'SUV',
+      path: '/forms/regular',
     },
-    {
-      name: 'Grid System',
-      path: '/components/grid-system'
-    },
-    {
-      name: 'Panels',
-      path: '/components/panels'
-    },
-    {
-      name: 'Sweet Alert',
-      path: '/components/sweet-alert'
-    },
-    {
-      name: 'Notifications',
-      path: '/components/notifications'
-    },
-    {
-      name: 'Icons',
-      path: '/components/icons'
-    },
-    {
-      name: 'Typography',
-      path: '/components/typography'
-    }]
+      {
+        name: 'Sedan',
+        path: '/forms/extended',
+      },
+      {
+        name: '친환경',
+        path: '/forms/validation',
+      }],
   },
   {
-    name: 'Forms',
-    icon: 'nc-icon nc-ruler-pencil',
+    name: 'Event',
+    icon: 'nc-icon nc-bell-55',
     children: [{
-      name: 'Regular Forms',
-      path: '/forms/regular'
+      name: '이벤트',
+      path: '/table-list/regular',
     },
-    {
-      name: 'Extended Forms',
-      path: '/forms/extended'
-    },
-    {
-      name: 'Validation Forms',
-      path: '/forms/validation'
-    },
-    {
-      name: 'Wizard',
-      path: '/forms/wizard'
-    }
-    ]
+      {
+        name: '당첨자발표',
+        path: '/table-list/extended',
+      },
+    ],
   },
-  {
-    name: 'Table List',
-    icon: 'nc-icon nc-single-copy-04',
-    collapsed: true,
-    children: [{
-      name: 'Regular Tables',
-      path: '/table-list/regular'
-    },
-    {
-      name: 'Extended Tables',
-      path: '/table-list/extended'
-    },
-    {
-      name: 'Paginated Tables',
-      path: '/table-list/paginated'
-    }
-    ]
-  },
-  {
-    name: 'Maps',
-    icon: 'nc-icon nc-pin-3',
-    children: [{
-      name: 'Google Maps',
-      path: '/maps/google'
-    },
-    {
-      name: 'Full Screen Maps',
-      path: '/maps/full-screen'
-    },
-    {
-      name: 'Vector Maps',
-      path: '/maps/vector-map'
-    }
-    ]
-  },
-  {
-    name: 'Widgets',
-    icon: 'nc-icon nc-box',
-    path: '/admin/widgets'
-  },
-  {
-    name: 'Charts',
-    icon: 'nc-icon nc-chart-bar-32',
-    path: '/charts'
-  },
-  {
-    name: 'Calendar',
-    icon: 'nc-icon nc-calendar-60',
-    path: '/calendar'
-  },
-]
+];
