@@ -17,4 +17,8 @@ function filterKakaoConsults(startDate, endDate) {
   })
 }
 
-export { getKakaoConsults, filterKakaoConsults };
+function completeDistribution(id) {
+  return instance.patch(`kakao-consults/distribution/${id}`);
+}
+
+export { getKakaoConsults, filterKakaoConsults, completeDistribution };

@@ -18,7 +18,7 @@
 				<p-button type="success" @click="getFilteredDate">조회</p-button>
 			</div>
 			<div class="table-btn-group">
-				<p-button type="default">배분 완료</p-button>
+				<p-button type="default" @click="completeDistribution">배분 완료</p-button>
 				<p-button type="default">수정</p-button>
 			</div>
 		</div>
@@ -54,6 +54,9 @@ export default {
 			const convertedDate = this.dateArray.map((date) => this.convertDate(date));
 			this.$emit('get-filtered-data', convertedDate);
 		},
+		completeDistribution() {
+			this.$emit('complete-distribution');
+		}
 	},
 	created() {
 		this.dateArray = this.setDefaultDate();

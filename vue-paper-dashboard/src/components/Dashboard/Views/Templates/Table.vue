@@ -1,6 +1,6 @@
 <template>
 	<div class="card-body table-responsive table-full-width">
-		<el-table :data="data">
+		<el-table :data="data" @selection-change="handleSelectionChange">
 			<el-table-column type="selection"></el-table-column>
 			<el-table-column type="index" label="NO" width="70"></el-table-column>
 			<el-table-column v-for="item in index" :label="item.label" :property="item.property"></el-table-column>
@@ -20,6 +20,11 @@ export default {
 		data: Array,
 		index: Array,
 	},
+	methods: {
+		handleSelectionChange(val) {
+			this.$emit('change-selection', val);
+		}
+	}
 };
 </script>
 
