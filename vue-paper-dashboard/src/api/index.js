@@ -8,4 +8,13 @@ function getKakaoConsults() {
   return instance.get('kakao-consults/list');
 }
 
-export { getKakaoConsults };
+function filterKakaoConsults(startDate, endDate) {
+  return instance.get('kakao-consults/list', {
+    params: {
+      startDate,
+      endDate
+    }
+  })
+}
+
+export { getKakaoConsults, filterKakaoConsults };

@@ -19,7 +19,7 @@
         <navbar-toggle-button @click.native="toggleSidebar">
         </navbar-toggle-button>
       </div>
-      <a class="navbar-brand" href="#pablo">Vue Paper Dashboard </a>
+      <a class="navbar-brand" href="#pablo">TEAM PINCAR</a>
     </div>
 
     <template slot="navbar-menu">

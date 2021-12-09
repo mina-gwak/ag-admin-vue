@@ -1,6 +1,10 @@
 const tableIndex = {
   kakao: [
     {
+      label: '접수일자',
+      property: 'receiptDate',
+    },
+    {
       label: '카카오톡ID',
       property: 'kakaotalkId',
     },

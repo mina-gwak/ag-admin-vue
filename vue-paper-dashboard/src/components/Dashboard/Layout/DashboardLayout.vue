@@ -1,6 +1,6 @@
 <template>
 	<div class="wrapper">
-		<side-bar :sidebar-links="sidebarLinks"></side-bar>
+		<side-bar :sidebar-links="sidebarLinks" title="ADMIN"></side-bar>
 
 		<div class="main-panel">
 			<top-navbar></top-navbar>
@@ -20,7 +20,7 @@ import DashboardContent from './Content.vue';
 import UserMenu from 'src/components/UIComponents/SidebarPlugin/UserMenu.vue';
 import SidebarItem from '../../UIComponents/SidebarPlugin/SidebarItem.vue';
 import SidebarShare from './SidebarSharePlugin';
-import sidebarLinks from '../../../sidebarLinks';
+import sidebarLinks from 'src/sidebarLinks';
 
 export default {
 	components: {
