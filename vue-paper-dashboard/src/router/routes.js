@@ -29,6 +29,7 @@ import Notifications from 'src/components/Dashboard/Views/Components/Notificatio
 import Icons from 'src/components/Dashboard/Views/Components/Icons.vue'
 import Typography from 'src/components/Dashboard/Views/Components/Typography.vue'
 import Kakao from 'src/components/Dashboard/Views/Pages/DB/Kakao';
+import EditKakaoConsult from 'src/components/Dashboard/Views/Pages/DB/EditKakaoConsult';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -193,7 +194,12 @@ let DBMenu = {
     {
       path: 'kakao-consults',
       name: 'Kakao',
-      components: { default: Kakao }
+      components: { default: Kakao },
+    },
+    {
+      path: 'kakao-consults/:id',
+      name: 'EditKakaoConsult',
+      components: { default: EditKakaoConsult },
     }
   ],
 }

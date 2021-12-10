@@ -5,6 +5,7 @@
 				<DBTableHeader title="카카오톡 상담접수 목록"
 											 @get-filtered-data="getFilteredData"
 											 @complete-distribution="completeDistribution"
+											 @go-edit-page="goEditPage"
 				></DBTableHeader>
 				<Table :data="consultData"
 							 :index="index"
@@ -18,7 +19,7 @@
 			<ul class="content-list">
 				<li v-for="data in index">
 					<p>{{ data.label }}</p>
-					<p>{{ modalContent[data.property] }}</p>
+					<p>{{ modalContent[data.property] ? modalContent[data.property] : '-'  }}</p>
 				</li>
 			</ul>
 		</Modal>
@@ -31,6 +32,7 @@ import Table from 'src/components/Dashboard/Views/Templates/Table';
 import DBTableHeader from 'src/components/Dashboard/Views/Templates/DBTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
 import tableIndex from 'src/assets/data';
+import router from 'src/main';
 
 export default {
 	name: 'Kakao',
@@ -96,11 +98,19 @@ export default {
 		closeModal() {
 			this.isModalOpen = false;
 		},
+		goEditPage() {
+			router.push({
+				name: 'EditKakaoConsult',
+				params: {
+					id: this.selections[0].idx,
+				}
+			})
+		}
 	},
 	created() {
 		this.getConsultData();
 	},
-	emit: ['get-filtered-data', 'complete-distribution', 'show-modal', 'close-modal'],
+	emit: ['get-filtered-data', 'complete-distribution', 'show-modal', 'close-modal', 'go-edit-page'],
 };
 </script>
 
@@ -122,13 +132,16 @@ export default {
 
 		p {
 			padding: 0 10px;
+			word-break: break-word;
+			border-left: 1px solid #DDD;
 		}
 
 		p:first-child {
+			flex-shrink: 0;
 			width: 90px;
 			font-weight: 600;
 			text-align: right;
-			border-right: 1px solid #DDD;
+			border: none;
 		}
 	}
 }

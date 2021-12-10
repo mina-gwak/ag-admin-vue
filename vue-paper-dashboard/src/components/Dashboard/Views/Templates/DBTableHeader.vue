@@ -20,7 +20,7 @@
 			</div>
 			<div class="table-btn-group">
 				<p-button type="default" @click="completeDistribution">배분 완료</p-button>
-				<p-button type="default">수정</p-button>
+				<p-button type="default" @click="goEditPage">수정</p-button>
 			</div>
 		</div>
 	</div>
@@ -58,6 +58,9 @@ export default {
 		completeDistribution() {
 			this.$emit('complete-distribution');
 		},
+		goEditPage() {
+			this.$emit('go-edit-page');
+		}
 	},
 	created() {
 		this.dateArray = this.setDefaultDate();

@@ -25,4 +25,10 @@ function showDetail(id) {
   return instance.get(`kakao-consults/${id}`);
 }
 
-export { getKakaoConsults, filterKakaoConsults, completeDistribution, showDetail };
+function updateKakaoConsults(id, updatedData) {
+  return instance.patch(`kakao-consults/${id}`, {
+    ...updatedData,
+  })
+}
+
+export { getKakaoConsults, filterKakaoConsults, completeDistribution, showDetail, updateKakaoConsults };

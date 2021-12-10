@@ -118,6 +118,7 @@ export default {
 }
 
 .modal-content {
+	min-width: 500px;
 	min-height: 400px;
 }
 </style>
