@@ -98,8 +98,19 @@ export default {
 		closeModal() {
 			this.isModalOpen = false;
 		},
-		goEditPage() {
-			router.push({
+		async goEditPage() {
+			if (this.selections.length === 0) {
+				alert('수정할 상담내역을 선택해주세요');
+				return;
+			}
+
+			if (this.selections.length > 1) {
+				alert('한 개의 상담내역만 선택해주세요');
+				await this.getConsultData();
+				return;
+			}
+
+			await router.push({
 				name: 'EditKakaoConsult',
 				params: {
 					id: this.selections[0].idx,
