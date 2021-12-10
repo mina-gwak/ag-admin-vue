@@ -1,31 +1,32 @@
 <template>
-  <div :class="{'nav-open': $sidebar.showSidebar}">
-    <notifications transition-name="notification-list" transition-mode="out-in">
+	<div :class="{'nav-open': $sidebar.showSidebar}">
+		<notifications transition-name="notification-list" transition-mode="out-in">
 
-    </notifications>
-    <router-view name="header"></router-view>
-    <transition name="fade"
-                mode="out-in">
-      <router-view></router-view>
-    </transition>
-    <router-view name="footer"></router-view>
-  </div>
+		</notifications>
+		<router-view name="header"></router-view>
+		<transition name="fade"
+								mode="out-in">
+			<router-view></router-view>
+		</transition>
+		<router-view name="footer"></router-view>
+	</div>
 </template>
 
 <script>
-  // Loading some plugin css asynchronously
-  import 'sweetalert2/dist/sweetalert2.css'
-  import 'vue-notifyjs/themes/default.css'
-  export default {
-  metaInfo() {
-    return {
-      title: "Vue Paper Dashboard Laravel by Creative Tim & UPDIVISION",
-      script: (function () {
-        if (process.env.VUE_APP_IS_DEMO == 1) {
-          return [
-            {
-              hid: "gtm-script1",
-              innerHTML: `
+// Loading some plugin css asynchronously
+import 'sweetalert2/dist/sweetalert2.css';
+import 'vue-notifyjs/themes/default.css';
+
+export default {
+	metaInfo() {
+		return {
+			title: 'Vue Paper Dashboard Laravel by Creative Tim & UPDIVISION',
+			script: (function() {
+				if (process.env.VUE_APP_IS_DEMO == 1) {
+					return [
+						{
+							hid: 'gtm-script1',
+							innerHTML: `
         (function (a, s, y, n, c, h, i, d, e) {
         s.className += " " + y;
         h.start = 1 * new Date();
@@ -42,12 +43,12 @@
         "GTM-K9BGS8K": true
       });
         `,
-              type: "text/javascript",
-              charset: "utf-8",
-            },
-            {
-              hid: "ga",
-              innerHTML: `
+							type: 'text/javascript',
+							charset: 'utf-8',
+						},
+						{
+							hid: 'ga',
+							innerHTML: `
              (function (i, s, o, g, r, a, m) {
             i["GoogleAnalyticsObject"] = r;
             (i[r] =
@@ -74,12 +75,12 @@
           ga("require", "linker");
           ga("linker:autoLink", ["2checkout.com", "avangate.com"]);
               `,
-              type: "text/javascript",
-              charset: "utf-8",
-            },
-            {
-              hid: "gtm-script2",
-              innerHTML: `
+							type: 'text/javascript',
+							charset: 'utf-8',
+						},
+						{
+							hid: 'gtm-script2',
+							innerHTML: `
              (function(w, d, s, l, i) {
               w[l] = w[l] || [];
               w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -91,16 +92,32 @@
               f.parentNode.insertBefore(j, f);
             })(window, document, "script", "dataLayer", "GTM-NKDMSK6");
               `,
-              type: "text/javascript",
-              charset: "utf-8",
-            },
-          ];
-        }
-      })(),
-    };
-  },
-}
+							type: 'text/javascript',
+							charset: 'utf-8',
+						},
+					];
+				}
+			})(),
+		};
+	},
+};
 </script>
 <style lang="scss">
+.d-block {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+}
 
+.modal-dialog {
+	padding-top: 0 !important;
+}
+
+.modal-header {
+	line-height: 25px;
+}
+
+.modal-content {
+	min-height: 400px;
+}
 </style>

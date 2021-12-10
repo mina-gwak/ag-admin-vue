@@ -1,4 +1,5 @@
-정<template>
+정
+<template>
 	<div class="table-header">
 		<div class="mt-2 mb-4 col-sm-12 card-header">
 			<h5 class="title">{{ title }}</h5>
@@ -48,7 +49,7 @@ export default {
 		setDefaultDate() {
 			const endDate = new Date();
 			const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() - 6);
-			return [this.convertDate(startDate), this.convertDate(endDate)];
+			return [startDate, endDate];
 		},
 		getFilteredDate() {
 			const convertedDate = this.dateArray.map((date) => this.convertDate(date));
@@ -56,10 +57,11 @@ export default {
 		},
 		completeDistribution() {
 			this.$emit('complete-distribution');
-		}
+		},
 	},
 	created() {
 		this.dateArray = this.setDefaultDate();
+		this.getFilteredDate();
 	},
 };
 </script>

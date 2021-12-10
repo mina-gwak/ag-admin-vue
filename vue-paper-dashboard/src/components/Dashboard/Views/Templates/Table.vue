@@ -1,9 +1,13 @@
 <template>
 	<div class="card-body table-responsive table-full-width">
-		<el-table :data="data" @selection-change="handleSelectionChange">
+		<el-table :data="data" @selection-change="handleSelectionChange" @row-dblclick="showModal">
 			<el-table-column type="selection"></el-table-column>
 			<el-table-column type="index" label="NO" width="70"></el-table-column>
-			<el-table-column v-for="item in index" :label="item.label" :property="item.property"></el-table-column>
+			<el-table-column v-for="item in index"
+											 :label="item.label"
+											 :property="item.property"
+											 :key="item.idx"
+			></el-table-column>
 		</el-table>
 	</div>
 </template>
@@ -23,6 +27,9 @@ export default {
 	methods: {
 		handleSelectionChange(val) {
 			this.$emit('change-selection', val);
+		},
+		showModal(data) {
+			this.$emit('show-modal', data.idx);
 		}
 	}
 };

@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '/api'
-})
+  baseURL: '/api',
+});
 
 function getKakaoConsults() {
   return instance.get('kakao-consults/list');
@@ -12,13 +12,17 @@ function filterKakaoConsults(startDate, endDate) {
   return instance.get('kakao-consults/list', {
     params: {
       startDate,
-      endDate
-    }
-  })
+      endDate,
+    },
+  });
 }
 
 function completeDistribution(id) {
   return instance.patch(`kakao-consults/distribution/${id}`);
 }
 
-export { getKakaoConsults, filterKakaoConsults, completeDistribution };
+function showDetail(id) {
+  return instance.get(`kakao-consults/${id}`);
+}
+
+export { getKakaoConsults, filterKakaoConsults, completeDistribution, showDetail };
