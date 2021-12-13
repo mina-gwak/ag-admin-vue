@@ -14,7 +14,7 @@ export default [
       },
       {
         name: '견적문의',
-        path: '/examples/user-management/list-users',
+        path: '/db/estimate-inquiries',
       },
       {
         name: '상세견적',
@@ -22,7 +22,7 @@ export default [
       },
       {
         name: '방문상담',
-        path: '/examples/user-management/list-users',
+        path: '/db/visit-consults',
       },
     ],
   },

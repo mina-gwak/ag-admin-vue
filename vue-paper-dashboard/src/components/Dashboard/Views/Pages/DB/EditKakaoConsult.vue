@@ -28,7 +28,7 @@
 <script>
 import { showDetail } from 'src/api';
 import { FgInput, Checkbox } from 'src/components/UIComponents';
-import { updateKakaoConsults } from 'src/api';
+import { updateConsults } from 'src/api';
 
 export default {
 	name: 'EditKakaoConsult',
@@ -38,6 +38,7 @@ export default {
 	},
 	data() {
 		return {
+			url: window.location.pathname.split('/')[2],
 			consultData: [],
 		};
 	},
@@ -55,9 +56,9 @@ export default {
 				kakaotalkId: this.consultData[1].value,
 			}
 			try {
-				await updateKakaoConsults(this.$route.params.id, updatedData);
+				await updateConsults(this.url, this.$route.params.id, updatedData);
 				alert('수정이 완료되었습니다');
-				window.location = '/db/kakao-consults';
+				window.location = `/db/${this.url}`;
 			} catch (error) {
 				console.log(error.response);
 			}
@@ -65,7 +66,7 @@ export default {
 		},
 	},
 	async created() {
-		const { data } = await showDetail(this.$route.params.id);
+		const { data } = await showDetail(this.url, this.$route.params.id);
 		this.consultData = [
 			{
 				label: '접수일자',
@@ -75,7 +76,7 @@ export default {
 			{
 				label: '카카오톡ID',
 				value: data.result.kakaotalkId,
-				type: 'text',
+				type: 'select',
 			},
 			{
 				label: '문의차량',

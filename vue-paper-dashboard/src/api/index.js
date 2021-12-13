@@ -4,12 +4,12 @@ const instance = axios.create({
   baseURL: '/api',
 });
 
-function getKakaoConsults() {
-  return instance.get('kakao-consults/list');
+function getConsults(url) {
+  return instance.get(`${url}/list`);
 }
 
-function filterKakaoConsults(startDate, endDate) {
-  return instance.get('kakao-consults/list', {
+function filterConsults(url, startDate, endDate) {
+  return instance.get(`${url}/list`, {
     params: {
       startDate,
       endDate,
@@ -17,18 +17,18 @@ function filterKakaoConsults(startDate, endDate) {
   });
 }
 
-function completeDistribution(id) {
-  return instance.patch(`kakao-consults/distribution/${id}`);
+function completeDistribution(url, id) {
+  return instance.patch(`${url}/distribution/${id}`);
 }
 
-function showDetail(id) {
-  return instance.get(`kakao-consults/${id}`);
+function showDetail(url, id) {
+  return instance.get(`${url}/${id}`);
 }
 
-function updateKakaoConsults(id, updatedData) {
-  return instance.patch(`kakao-consults/${id}`, {
+function updateConsults(url, id, updatedData) {
+  return instance.patch(`${url}/${id}`, {
     ...updatedData,
   })
 }
 
-export { getKakaoConsults, filterKakaoConsults, completeDistribution, showDetail, updateKakaoConsults };
+export { getConsults, filterConsults, completeDistribution, showDetail, updateConsults };
