@@ -32,6 +32,8 @@ import Kakao from 'src/components/Dashboard/Views/Pages/DB/Kakao';
 import EditKakaoConsult from 'src/components/Dashboard/Views/Pages/DB/EditKakaoConsult';
 import EstimateInquiries from 'src/components/Dashboard/Views/Pages/DB/EstimateInquiries';
 import Visit from 'src/components/Dashboard/Views/Pages/DB/Visit';
+import EditEstimateInquiries from 'src/components/Dashboard/Views/Pages/DB/EditEstimateInquiries';
+import EditVisit from 'src/components/Dashboard/Views/Pages/DB/EditVisit';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -210,10 +212,20 @@ let DBMenu = {
       components: { default: EstimateInquiries },
     },
     {
+      path: 'estimate-inquiries/:id',
+      name: 'EditEstimateInquiries',
+      components: { default: EditEstimateInquiries },
+    },
+    {
       path: 'visit-consults',
       name: 'Visit',
       components: { default: Visit },
-    }
+    },
+    {
+      path: 'visit-consults/:id',
+      name: 'EditVisit',
+      components: { default: EditVisit },
+    },
   ],
 }
 

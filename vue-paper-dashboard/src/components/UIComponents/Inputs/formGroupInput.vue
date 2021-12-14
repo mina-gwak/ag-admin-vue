@@ -29,6 +29,7 @@
         class="form-control"
         :required="required"
         :class="[{'is-valid': hasSuccess}, inputClasses, {'is-invalid': error}]"
+				@input="autoHypen($event)"
         aria-describedby="addon-right addon-left">
     </slot>
     <div v-if="addonRightIcon || $slots.addonRight" class="input-group-append">
@@ -82,7 +83,11 @@
       addonLeftIcon: {
         type: String,
         description: 'Addont left icon'
-      }
+      },
+			autoHypen: {
+      	type: Function,
+				default: () => { },
+			},
     },
     data() {
       return {

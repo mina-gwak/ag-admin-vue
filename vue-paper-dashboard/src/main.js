@@ -29,6 +29,7 @@ import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
 import SideBar from './components/UIComponents/SidebarPlugin'
 import initProgress from './progressbar';
+import {Select, Option} from 'element-ui';
 
 // router setup
 import routes from './router/routes'
@@ -56,6 +57,9 @@ Vue.use(SideBar, {sidebarLinks: sidebarLinks})
 locale.use(lang)
 Vue.use(IsDemo)
 Vue.use(VueMeta)
+Vue.use(Select)
+Vue.use(Option)
+
 // configure router
 const router = new VueRouter({
   mode: 'history',

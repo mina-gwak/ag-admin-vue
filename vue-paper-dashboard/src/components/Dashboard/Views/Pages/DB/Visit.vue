@@ -2,7 +2,7 @@
 	<ShowDBTable title="방문상담 상담접수 목록"
 							 :url="url"
 							 :index="index"
-							 routerName="EditConsult"
+							 routerName="EditVisit"
 	></ShowDBTable>
 </template>
 

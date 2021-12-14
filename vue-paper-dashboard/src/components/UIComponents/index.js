@@ -8,6 +8,7 @@ import Switch from './Switch'
 import FgInput from './Inputs/formGroupInput'
 import Checkbox from './Inputs/Checkbox'
 import Radio from './Inputs/Radio'
+import Select from './Inputs/Select'
 import StatsCard from './Cards/StatsCard'
 import InfoSection from './InfoSection'
 import Collapse from './Collapse/Collapse'
@@ -41,6 +42,7 @@ export {
   TabPane,
   Modal,
   Radio,
+  Select,
   StatsCard,
   Collapse,
   CollapseItem,
