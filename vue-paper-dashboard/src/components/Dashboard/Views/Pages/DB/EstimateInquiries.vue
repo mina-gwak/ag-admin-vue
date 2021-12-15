@@ -18,7 +18,7 @@ export default {
 	data() {
 		return {
 			url: 'estimate-inquiries',
-			index: tableIndex.estimateInquiry,
+			index: tableIndex.estimateInquiries,
 		};
 	}
 };

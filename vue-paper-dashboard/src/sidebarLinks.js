@@ -2,7 +2,7 @@ export default [
   {
     name: 'Main',
     icon: 'nc-icon nc-shop',
-    path: '/admin/overview',
+    path: '/',
   },
   {
     name: 'DB',
