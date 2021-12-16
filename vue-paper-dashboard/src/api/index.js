@@ -1,8 +1,14 @@
 import axios from 'axios';
+import { setInterceptors } from './common/interceptors';
 
-const instance = axios.create({
-  baseURL: '/api',
-});
+function createInstance() {
+  const instance = axios.create({
+    baseURL: '/api',
+  });
+  return setInterceptors(instance);
+}
+
+const instance = createInstance();
 
 function getConsults(url) {
   return instance.get(`${url}/list`);
@@ -31,4 +37,10 @@ function updateConsults(url, id, updatedData) {
   })
 }
 
-export { getConsults, filterConsults, completeDistribution, showDetail, updateConsults };
+function loginUser(user) {
+  return instance.post('login', {
+    ...user
+  })
+}
+
+export { getConsults, filterConsults, completeDistribution, showDetail, updateConsults, loginUser };

@@ -29,8 +29,7 @@
 					 class="form-group col-sm-6 col-12 has-label">
 				<label>{{ data.label }}</label>
 				<div v-for="option in options[data.property]">
-					<Radio v-model="data.value" :value="option.value" :label="option.value" :inline="true"></Radio>
-					<label>{{ option.label }}</label>
+					<Radio v-model="data.value" :value="option.value" :label="option.value" :inline="true" >{{ option.label }}</Radio>
 				</div>
 			</div>
 
@@ -38,8 +37,7 @@
 					 class="form-group col-sm-6 col-12 has-label">
 				<label>{{ data.label }}</label>
 				<div>
-					<Checkbox v-model="data.value" :inline="true"></Checkbox>
-					<label>동의</label>
+					<Checkbox v-model="data.value" :inline="true" >동의</Checkbox>
 				</div>
 			</div>
 
@@ -141,8 +139,4 @@ export default {
 </script>
 
 <style scoped>
-.form-group .form-check,
-.form-group .form-check-radio {
-	top: -15px;
-}
 </style>

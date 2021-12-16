@@ -47,18 +47,10 @@
                     </div>
                   </template>
 
-                  <fg-input v-model="name" class="mb-2" addon-left-icon="nc-icon nc-single-02" placeholder="Name"/>
-                  <validation-error :errors="apiValidationErrors.name"/>
                   <fg-input v-model="email" class="mb-2 mt-1" addon-left-icon="nc-icon nc-email-85" placeholder="Email"/>
                   <validation-error :errors="apiValidationErrors.email"/>
                   <fg-input v-model="password" class="mb-2 mt-1" addon-left-icon="nc-icon nc-key-25" placeholder="Password" type="password"/>
                   <validation-error :errors="apiValidationErrors.password"/>
-                  <fg-input v-model="password_confirmation" class="mb-2 mt-1" addon-left-icon="nc-icon nc-key-25" placeholder="Password confirmation" type="password"/>
-                  <validation-error :errors="apiValidationErrors.password_confirmation"/>
-                  <p-checkbox class="text-left" v-model="boolean">
-                    I agree to the
-                    <a href="#something">terms and conditions</a>.
-                  </p-checkbox>
 
                   <p-button native-type="submit" slot="footer" type="info" round>Get Started</p-button>
                 </card>
@@ -102,24 +94,12 @@
     },
     methods: {
       async register() {
-        if (!this.boolean) {
-          await this.$notify({
-            type: 'danger',
-            message: 'You need to agree with our terms and conditions.',
-          })
-          return;
-        }
+
         const user = {
-          data: {
-            type: "token",
-            attributes: {
-              name: this.name,
-              email: this.email,
-              password: this.password,
-              password_confirmation: this.password_confirmation,
-            },
-          },
+					email: this.email,
+					password: this.password,
         };
+
         const requestOptions = {
           headers: {
             Accept: "application/vnd.api+json",

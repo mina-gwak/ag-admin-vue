@@ -125,6 +125,38 @@ const tableIndex = {
       type: 'checkbox',
     },
   ],
+  slides: [
+    {
+      label: '제목',
+      property: 'title',
+      type: 'text',
+    },
+    {
+      label: '상태',
+      property: 'saveType',
+      type: 'text',
+    },
+    {
+      label: '링크페이지',
+      property: 'link',
+      type: 'text',
+    },
+    {
+      label: '내용',
+      property: 'content',
+      type: 'text',
+    },
+    {
+      label: '게시시작일',
+      property: 'startDate',
+      type: 'date',
+    },
+    {
+      label: '게시종료일',
+      property: 'endDate',
+      type: 'date',
+    },
+  ],
 };
 
 export default tableIndex;

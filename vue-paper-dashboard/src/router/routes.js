@@ -34,6 +34,7 @@ import EstimateInquiries from 'src/components/Dashboard/Views/Pages/DB/EstimateI
 import Visit from 'src/components/Dashboard/Views/Pages/DB/Visit';
 import EditEstimateInquiries from 'src/components/Dashboard/Views/Pages/DB/EditEstimateInquiries';
 import EditVisit from 'src/components/Dashboard/Views/Pages/DB/EditVisit';
+import Slides from '../components/Dashboard/Views/Pages/MainScreen/Slides';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -227,20 +228,30 @@ let DBMenu = {
       components: { default: EditVisit },
     },
   ],
-}
+};
+
+let mainScreenMenu = {
+  path: '/main-screen',
+  component: DashboardLayout,
+  name: 'MainScreen',
+  children: [
+    {
+      path: 'slides',
+      name: 'Slides',
+      components: { default: Slides },
+    },
+  ]
+};
 
 const routes = [
   {
     path: '/',
     component: DashboardLayout,
-    // redirect: '/admin/overview',
-    children: [
-      {
-        path: 'charts',
-        name: 'Charts',
-        component: Charts
-      }
-    ]
+    redirect: '/home',
+  },
+  {
+    path: '/home',
+    component: DashboardLayout,
   },
   componentsMenu,
   tablesMenu,
@@ -253,6 +264,7 @@ const routes = [
   resetPassword,
   examplesMenu,
   DBMenu,
+  mainScreenMenu,
   {
     path: '/admin',
     component: DashboardLayout,

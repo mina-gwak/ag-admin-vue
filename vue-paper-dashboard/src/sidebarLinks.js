@@ -2,7 +2,7 @@ export default [
   {
     name: 'Main',
     icon: 'nc-icon nc-shop',
-    path: '/',
+    path: '/home',
   },
   {
     name: 'DB',
@@ -32,7 +32,7 @@ export default [
     children: [
       {
         name: '슬라이드',
-        path: '/pages/timeline',
+        path: '/main-screen/slides',
       },
       {
         name: '상품리스트',

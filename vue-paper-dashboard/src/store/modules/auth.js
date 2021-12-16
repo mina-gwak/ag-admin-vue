@@ -1,13 +1,14 @@
 import Vue from "vue";
 import router from "@/main";
 import { VueAuthenticate } from "vue-authenticate";
+import { getAuthFromCookie, getUserFromCookie, saveAuthToCookie, saveUserToCookie } from 'src/util/cookies';
 
 import axios from "axios";
 import VueAxios from "vue-axios";
 Vue.use(VueAxios, axios);
 
 const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
-  baseUrl: process.env.VUE_APP_API_BASE_URL,
+  baseUrl: '/api',
   tokenName: "access_token",
   loginUrl: "/login",
   registerUrl: "/register"
@@ -15,7 +16,8 @@ const vueAuth = new VueAuthenticate(Vue.prototype.$http, {
 
 export default {
   state: {
-    isAuthenticated: localStorage.getItem("vue-authenticate.vueauth_access_token") !== null
+    token: getAuthFromCookie() || '',
+    userIdx: getUserFromCookie() || '',
   },
 
   getters: {
@@ -27,13 +29,27 @@ export default {
   mutations: {
     isAuthenticated(state, payload) {
       state.isAuthenticated = payload.isAuthenticated;
-    }
+    },
+    setUserIdx(state, username) {
+      state.username = username;
+    },
+    clearUserIdx(state) {
+      state.username = '';
+    },
+    setToken(state, token) {
+      state.token = token;
+    },
   },
 
   actions: {
-    login(context, payload) {
+    login({ commit }, payload) {
       return vueAuth.login(payload.user, payload.requestOptions).then(response => {
-        context.commit("isAuthenticated", {
+        console.log(response);
+        commit('setToken', response.data.result.jwtToken);
+        commit('setUserIdx', response.data.result.idx);
+        saveAuthToCookie(response.data.result.jwtToken);
+        saveUserToCookie(response.data.result.idx);
+        commit("isAuthenticated", {
           isAuthenticated: vueAuth.isAuthenticated()
         });
         router.push({path: "/"});

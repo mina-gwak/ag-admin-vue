@@ -64,8 +64,8 @@ export default {
   },
   data() {
     return {
-      email: "admin@jsonapi.com",
-      password: "secret",
+      email: "abc@gmail.com",
+      password: "abc",
     }
   },
   methods: {
@@ -78,13 +78,8 @@ export default {
     },
     async login() {
       const user = {
-        data: {
-          type: "token",
-          attributes: {
-            email: this.email,
-            password: this.password
-          }
-        }
+				email: this.email,
+				password: this.password
       }
 
       const requestOptions = {
