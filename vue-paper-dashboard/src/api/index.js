@@ -10,7 +10,7 @@ function createInstance() {
 
 const instance = createInstance();
 
-function getConsults(url) {
+function getData(url) {
   return instance.get(`${url}/list`);
 }
 
@@ -34,13 +34,23 @@ function showDetail(url, id) {
 function updateConsults(url, id, updatedData) {
   return instance.patch(`${url}/${id}`, {
     ...updatedData,
-  })
+  });
 }
 
 function loginUser(user) {
   return instance.post('login', {
-    ...user
-  })
+    ...user,
+  });
 }
 
-export { getConsults, filterConsults, completeDistribution, showDetail, updateConsults, loginUser };
+function endPosting(url, id) {
+  return instance.delete(`${url}/${id}`);
+}
+
+function addData(url, data) {
+  return instance.post(`${url}`, {
+    ...data,
+  });
+}
+
+export { getData, filterConsults, completeDistribution, showDetail, updateConsults, loginUser, endPosting, addData };

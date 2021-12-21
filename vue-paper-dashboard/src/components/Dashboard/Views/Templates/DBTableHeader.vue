@@ -16,24 +16,29 @@
 						start-placeholder="Start date"
 						end-placeholder="End date">
 				</el-date-picker>
-				<p-button type="success" @click="getFilteredDate">조회</p-button>
+				<Button type="success" @click="setDateArray">조회</Button>
 			</div>
 			<div class="table-btn-group">
-				<p-button type="default" @click="completeDistribution">배분 완료</p-button>
-				<p-button type="default" @click="goEditPage">수정</p-button>
+				<Button type="default" @click="completeDistribution">배분 완료</Button>
+				<Button type="default" @click="goEditPage">수정</Button>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 import { DatePicker } from 'element-ui';
+import { Button } from 'src/components/UIComponents';
 import Vue from 'vue';
 
 Vue.use(DatePicker);
+
 export default {
 	name: 'DBTableHeader',
 	props: {
 		title: String,
+	},
+	components: {
+		Button
 	},
 	data() {
 		return {
@@ -51,20 +56,20 @@ export default {
 			const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() - 6);
 			return [startDate, endDate];
 		},
-		getFilteredDate() {
+		setDateArray() {
 			const convertedDate = this.dateArray.map((date) => this.convertDate(date));
-			this.$emit('get-filtered-data', convertedDate);
+			this.$emit('set-date-array', convertedDate);
 		},
 		completeDistribution() {
 			this.$emit('complete-distribution');
 		},
 		goEditPage() {
 			this.$emit('go-edit-page');
-		}
+		},
 	},
 	created() {
 		this.dateArray = this.setDefaultDate();
-		this.getFilteredDate();
+		this.setDateArray();
 	},
 };
 </script>

@@ -3,7 +3,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<DBTableHeader :title="title"
-											 @get-filtered-data="getFilteredData"
+											 @set-date-array="setDateArray"
 											 @complete-distribution="completeDistribution"
 											 @go-edit-page="goEditPage"
 				></DBTableHeader>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { getConsults, filterConsults, completeDistribution, showDetail } from 'src/api';
+import { filterConsults, completeDistribution, showDetail } from 'src/api';
 import Table from 'src/components/Dashboard/Views/Templates/Table';
 import DBTableHeader from 'src/components/Dashboard/Views/Templates/DBTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
@@ -48,6 +48,7 @@ export default {
 	},
 	data() {
 		return {
+			date: [],
 			consultData: [],
 			selections: [],
 			isModalOpen: false,
@@ -55,17 +56,12 @@ export default {
 		};
 	},
 	methods: {
-		async getConsultData() {
-			try {
-				const { data } = await getConsults(this.url);
-				this.consultData = data.result;
-			} catch (error) {
-				console.log(error.response);
-			}
+		setDateArray(dateArray) {
+			this.date = dateArray;
 		},
-		async getFilteredData(dateArray) {
+		async getFilteredData() {
 			try {
-				const { data } = await filterConsults(this.url, ...dateArray);
+				const { data } = await filterConsults(this.url, ...this.date);
 				this.consultData = data.result;
 			} catch (error) {
 				console.log(error.response);
@@ -122,15 +118,15 @@ export default {
 			});
 		},
 	},
-	created() {
-		this.getConsultData();
+	mounted() {
+		this.getFilteredData();
 	},
 	computed: {
 		changeSelect() {
 			return this.selections;
 		},
 	},
-	emit: ['get-filtered-data', 'complete-distribution', 'show-modal', 'close-modal', 'go-edit-page'],
+	emit: ['set-date-array', 'complete-distribution', 'show-modal', 'close-modal', 'go-edit-page'],
 };
 </script>
 

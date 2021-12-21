@@ -2,11 +2,11 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<DBTableHeader title="슬라이드 게시 현황"
-											 @get-filtered-data="getFilteredData"
-											 @complete-distribution="completeDistribution"
-											 @go-edit-page="goEditPage"
-				></DBTableHeader>
+				<SlideTableHeader title="슬라이드 게시 현황"
+													@end-posting="endPosting"
+													@go-edit-page="goEditPage"
+													@go-add-page="goAddPage"
+				></SlideTableHeader>
 				<Table :data="consultData"
 							 :index="index"
 							 @change-selection="changeSelection"
@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import { getConsults, filterConsults, completeDistribution, showDetail } from 'src/api';
+import { getData, showDetail, endPosting } from 'src/api';
 import Table from 'src/components/Dashboard/Views/Templates/Table';
-import DBTableHeader from 'src/components/Dashboard/Views/Templates/DBTableHeader';
+import SlideTableHeader from 'src/components/Dashboard/Views/Templates/SlideTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
 import router from 'src/main';
 import tableIndex from 'src/assets/data';
@@ -42,7 +42,7 @@ export default {
 	},
 	components: {
 		Table,
-		DBTableHeader,
+		SlideTableHeader,
 		Modal,
 	},
 	data() {
@@ -58,16 +58,8 @@ export default {
 	methods: {
 		async getConsultData() {
 			try {
-				const { data } = await getConsults(this.url);
-				this.consultData = data.result;
-			} catch (error) {
-				console.log(error.response);
-			}
-		},
-		async getFilteredData(dateArray) {
-			try {
-				const { data } = await filterConsults(this.url, ...dateArray);
-				this.consultData = data.result;
+				const { data } = await getData(this.url);
+				this.setIdx(data.result);
 			} catch (error) {
 				console.log(error.response);
 			}
@@ -75,13 +67,21 @@ export default {
 		changeSelection(selections) {
 			this.selections = selections;
 		},
-		async completeDistribution() {
+		setIdx(result) {
+			this.consultData = result.map((item) => {
+				return {
+					...item,
+					idx: item.slideIdx,
+				};
+			});
+		},
+		async endPosting() {
 			try {
 				if (this.selections.length === 0) {
 					alert('선택된 데이터가 없습니다');
 				} else {
 					for (let i = 0; i < this.selections.length; i++) {
-						const response = await completeDistribution(this.url, this.selections[i].idx);
+						const response = await endPosting(this.url, this.selections[i].idx);
 						if (response.data.status !== '200') {
 							alert(response.data.message);
 							await this.getConsultData();
@@ -116,10 +116,15 @@ export default {
 			}
 
 			await router.push({
-				name: 'slides',
+				name: 'EditSlides',
 				params: {
 					id: this.selections[0].idx,
 				},
+			});
+		},
+		goAddPage() {
+			router.replace({
+				name: 'AddSlide',
 			});
 		},
 	},
@@ -131,7 +136,7 @@ export default {
 			return this.selections;
 		},
 	},
-	emit: ['get-filtered-data', 'complete-distribution', 'show-modal', 'close-modal', 'go-edit-page'],
+	emit: ['get-filtered-data', 'complete-distribution', 'show-modal', 'close-modal', 'go-edit-page', 'go-add-page'],
 };
 </script>
 
