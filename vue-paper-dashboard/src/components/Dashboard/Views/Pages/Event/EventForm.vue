@@ -92,6 +92,11 @@ export default {
 		};
 	},
 	methods: {
+		setDefaultDate() {
+			const startDate = new Date();
+			const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 13);
+			return [startDate, endDate];
+		},
 		async onSubmit(event) {
 			const saveType = event.target.textContent === '임시저장' ? 'TEMPORARY' : 'SAVE';
 
@@ -121,6 +126,15 @@ export default {
 				that.eventData = newData;
 			});
 		},
+	},
+	created() {
+		if (this.type === '등록') {
+			const [ startDate, endDate ] = this.setDefaultDate();
+			this.eventData = {
+				startDate,
+				endDate,
+			};
+		}
 	},
 	watch: {
 		event() {
