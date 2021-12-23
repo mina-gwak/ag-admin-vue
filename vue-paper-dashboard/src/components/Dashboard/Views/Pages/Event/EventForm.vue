@@ -12,7 +12,7 @@
 			<label class="col-12">이벤트 썸네일</label>
 			<div class="image-container">
 				<label for="thumbnail" class="absolute-center"></label>
-				<input id="thumbnail" type="file" accept="image/*" @change="uploadImage($event)" />
+				<input id="thumbnail" type="file" accept="image/*" @change="handleChange($event)" />
 				<div class="upload-text absolute-center" v-if="eventData.thumbnail === undefined">Upload</div>
 				<img v-else :src="eventData.thumbnail" class="absolute-center" alt="미리보기" />
 			</div>
@@ -65,7 +65,7 @@
 			<label class="col-12">이벤트 상세페이지 적용 이미지</label>
 			<div class="image-container">
 				<label for="contentImage" class="absolute-center"></label>
-				<input id="contentImage" type="file" accept="image/*" @change="uploadImage($event)" />
+				<input id="contentImage" type="file" accept="image/*" @change="handleChange($event)" />
 				<div class="upload-text absolute-center" v-if="eventData.contentImage === undefined">Upload</div>
 				<img v-else :src="eventData.contentImage" class="absolute-center" alt="미리보기" />
 			</div>
@@ -81,7 +81,7 @@
 <script>
 import { addData, updateConsults } from 'src/api';
 import { Button } from 'src/components/UIComponents';
-import * as AWS from 'aws-sdk';
+import { uploadImage } from 'src/util/uploadImage';
 
 export default {
 	name: 'EventForm',
@@ -90,7 +90,7 @@ export default {
 		event: Object,
 	},
 	components: {
-		Button
+		Button,
 	},
 	data() {
 		return {
@@ -129,46 +129,12 @@ export default {
 				alert(error.response.data.message);
 			}
 		},
-		uploadImage(event) {
-			const imageFile = event.target.files[0];
-			const property = event.target.id;
-			if (!imageFile) return;
-
-			const upload = new AWS.S3.ManagedUpload({
-				params: {
-					Bucket: 'ag-admin-image',
-					Key: imageFile.name,
-					Body: imageFile,
-				},
-			});
-
-			const promise = upload.promise();
-
-			const slideThis = this;
-
-			promise.then(
-					function(data) {
-						slideThis.eventData = {
-							...slideThis.eventData,
-							[property]: data.Location,
-						};
-					},
-					function(error) {
-						console.log(error);
-					},
-			);
-
-		},
-		updateAWS() {
-			AWS.config.update({
-				region: 'ap-northeast-2',
-				accessKeyId: 'AKIAXM2NN2ZBW4CCKRMB',
-				secretAccessKey: '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',
+		async handleChange(event) {
+			const that = this;
+			uploadImage(event, this.eventData).then((newData) => {
+				that.eventData = newData;
 			});
 		},
-	},
-	async created() {
-		this.updateAWS();
 	},
 	watch: {
 		event() {

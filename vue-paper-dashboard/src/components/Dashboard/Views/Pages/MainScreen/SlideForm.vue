@@ -51,8 +51,8 @@
 		<div class="form-row">
 			<label class="col-12">이미지 업로드</label>
 			<div class="image-container">
-				<label for="uploadedImage" class="absolute-center"></label>
-				<input id="uploadedImage" type="file" accept="image/*" @change="uploadImage($event)" />
+				<label for="image" class="absolute-center"></label>
+				<input id="image" type="file" accept="image/*" @change="handleChange($event)" />
 				<div class="upload-text absolute-center" v-if="slideData.image === undefined">Upload</div>
 				<img v-else :src="slideData.image" class="absolute-center" alt="미리보기" />
 			</div>
@@ -67,7 +67,7 @@
 <script>
 import { addData, updateConsults } from 'src/api';
 import { Button } from 'src/components/UIComponents';
-import * as AWS from 'aws-sdk';
+import { uploadImage } from 'src/util/uploadImage';
 
 export default {
 	name: 'SlideForm',
@@ -76,7 +76,7 @@ export default {
 		slide: Object,
 	},
 	components: {
-		Button
+		Button,
 	},
 	data() {
 		return {
@@ -115,45 +115,12 @@ export default {
 				alert(error.response.data.message);
 			}
 		},
-		uploadImage(event) {
-			const imageFile = event.target.files[0];
-			if (!imageFile) return;
-
-			const upload = new AWS.S3.ManagedUpload({
-				params: {
-					Bucket: 'ag-admin-image',
-					Key: imageFile.name,
-					Body: imageFile,
-				},
-			});
-
-			const promise = upload.promise();
-
-			const slideThis = this;
-
-			promise.then(
-					function(data) {
-						slideThis.slideData = {
-							...slideThis.slideData,
-							image: data.Location,
-						};
-					},
-					function(error) {
-						console.log(error);
-					},
-			);
-
-		},
-		updateAWS() {
-			AWS.config.update({
-				region: 'ap-northeast-2',
-				accessKeyId: 'AKIAXM2NN2ZBW4CCKRMB',
-				secretAccessKey: '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',
+		async handleChange(event) {
+			const that = this;
+			uploadImage(event, this.slideData).then((newData) => {
+				that.slideData = newData;
 			});
 		},
-	},
-	async created() {
-		this.updateAWS();
 	},
 	watch: {
 		slide() {
