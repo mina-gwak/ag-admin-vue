@@ -48,15 +48,16 @@
 			</div>
 		</template>
 
-		<p-button nativeType="submit">수정</p-button>
+		<Button nativeType="submit">수정</Button>
 	</form>
 </template>
 
 <script>
-import { showDetail, updateConsults } from 'src/api';
-import { FgInput, Checkbox, Select, Radio } from 'src/components/UIComponents';
+import { getDetailData, updateData } from 'src/api';
+import { FgInput, Checkbox, Select, Radio, Button } from 'src/components/UIComponents';
 import options from 'src/assets/data/options';
 import tableIndex from 'src/assets/data';
+import { convertDate } from 'src/util/date';
 
 export default {
 	name: 'EditForm',
@@ -65,6 +66,7 @@ export default {
 		Checkbox,
 		Select,
 		Radio,
+		Button
 	},
 	props: {
 		page: String,
@@ -77,11 +79,6 @@ export default {
 		};
 	},
 	methods: {
-		convertDate(date) {
-			const offset = new Date().getTimezoneOffset() * 60000;
-			const newDate = new Date(new Date(date) - offset);
-			return newDate.toISOString().split('T')[0];
-		},
 		autoHypen(event) {
 			let str = event.target.value;
 			str = str.replace(/[^0-9]/g, '');
@@ -99,7 +96,7 @@ export default {
 			const updatedData = {};
 			this.consultData.map((data) => updatedData[data.property] = data.value);
 			try {
-				await updateConsults(this.url, this.$route.params.id, updatedData);
+				await updateData(this.url, this.$route.params.id, updatedData);
 				alert('수정이 완료되었습니다');
 				window.location = `/db/${this.url}`;
 			} catch (error) {
@@ -108,10 +105,10 @@ export default {
 		},
 	},
 	async created() {
-		const { data } = await showDetail(this.url, this.$route.params.id);
+		const { data } = await getDetailData(this.url, this.$route.params.id);
 		this.consultData = this.consultData.map((item) => {
 			if (item.type === 'date') {
-				const value = this.convertDate(data.result[item.property]);
+				const value = convertDate(data.result[item.property]);
 				return {
 					...item,
 					value: value,

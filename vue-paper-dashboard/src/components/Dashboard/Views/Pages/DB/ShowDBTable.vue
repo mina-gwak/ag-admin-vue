@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { filterConsults, completeDistribution, showDetail } from 'src/api';
+import { getDetailData, filterData, completeDistribution } from 'src/api';
 import Table from 'src/components/Dashboard/Views/Templates/Table';
 import DBTableHeader from 'src/components/Dashboard/Views/Templates/DBTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
@@ -61,7 +61,7 @@ export default {
 		},
 		async getFilteredData() {
 			try {
-				const { data } = await filterConsults(this.url, ...this.date);
+				const { data } = await filterData(this.url, ...this.date);
 				this.consultData = data.result;
 			} catch (error) {
 				console.log(error.response);
@@ -92,7 +92,7 @@ export default {
 		},
 		async showModal(idx) {
 			this.isModalOpen = true;
-			const { data } = await showDetail(this.url, idx);
+			const { data } = await getDetailData(this.url, idx);
 			this.modalContent = data.result;
 		},
 		closeModal() {

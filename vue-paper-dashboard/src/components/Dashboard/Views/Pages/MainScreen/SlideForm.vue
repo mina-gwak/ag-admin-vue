@@ -60,9 +60,10 @@
 </template>
 
 <script>
-import { addData, updateConsults } from 'src/api';
+import { addData, updateData } from 'src/api';
 import { Button, ImageUploader } from 'src/components/UIComponents';
 import { uploadImage } from 'src/util/uploadImage';
+import { convertDate } from 'src/util/date';
 
 export default {
 	name: 'SlideForm',
@@ -82,19 +83,13 @@ export default {
 		};
 	},
 	methods: {
-		convertDate(date) {
-			const offset = new Date().getTimezoneOffset() * 60000;
-			const newDate = new Date(new Date(date) - offset);
-			return newDate.toISOString().split('T')[0];
-		},
-
 		async onSubmit(event) {
 			const saveType = event.target.textContent === '임시저장' ? 'TEMPORARY' : 'SAVE';
 
 			const updatedData = {
 				...this.slideData,
-				startDate: this.slideData.startDate ? this.convertDate(this.slideData.startDate) : '',
-				endDate: this.slideData.endDate ? this.convertDate(this.slideData.endDate) : '',
+				startDate: this.slideData.startDate ? convertDate(this.slideData.startDate) : '',
+				endDate: this.slideData.endDate ? convertDate(this.slideData.endDate) : '',
 				saveType: saveType,
 			};
 
@@ -103,7 +98,7 @@ export default {
 					await addData(this.url, updatedData);
 					alert('등록이 완료되었습니다');
 				} else {
-					await updateConsults(this.url, this.$route.params.id, updatedData);
+					await updateData(this.url, this.$route.params.id, updatedData);
 					alert('수정이 완료되었습니다');
 				}
 				window.location = `/main-screen/${this.url}`;

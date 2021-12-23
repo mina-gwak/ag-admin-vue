@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { getData, showDetail, deleteData } from 'src/api';
+import { getData, getDetailData, deleteData } from 'src/api';
 import Table from 'src/components/Dashboard/Views/Templates/Table';
 import EventTableHeader from 'src/components/Dashboard/Views/Templates/EventTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
@@ -82,7 +82,7 @@ export default {
 		},
 		async showModal(idx) {
 			this.isModalOpen = true;
-			const { data } = await showDetail(this.url, idx);
+			const { data } = await getDetailData(this.url, idx);
 			this.modalContent = data.result;
 		},
 		closeModal() {

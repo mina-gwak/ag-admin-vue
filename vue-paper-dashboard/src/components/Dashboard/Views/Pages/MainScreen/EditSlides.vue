@@ -15,7 +15,7 @@
 
 <script>
 import SlideForm from './SlideForm';
-import { showDetail } from 'src/api';
+import { getDetailData } from 'src/api';
 
 export default {
 	name: 'EditSlides',
@@ -28,9 +28,8 @@ export default {
 		};
 	},
 	async created() {
-		const { data } = await showDetail('slides', this.$route.params.id);
+		const { data } = await getDetailData('slides', this.$route.params.id);
 		this.slideData = data.result;
-		console.log(this.slideData);
 	},
 };
 </script>

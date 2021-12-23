@@ -69,9 +69,10 @@
 </template>
 
 <script>
-import { addData, updateConsults } from 'src/api';
+import { addData, updateData } from 'src/api';
 import { Button, ImageUploader } from 'src/components/UIComponents';
 import { uploadImage } from 'src/util/uploadImage';
+import { convertDate } from 'src/util/date';
 
 export default {
 	name: 'EventForm',
@@ -91,19 +92,13 @@ export default {
 		};
 	},
 	methods: {
-		convertDate(date) {
-			const offset = new Date().getTimezoneOffset() * 60000;
-			const newDate = new Date(new Date(date) - offset);
-			return newDate.toISOString().split('T')[0];
-		},
-
 		async onSubmit(event) {
 			const saveType = event.target.textContent === '임시저장' ? 'TEMPORARY' : 'SAVE';
 
 			const updatedData = {
 				...this.eventData,
-				startDate: this.eventData.startDate ? this.convertDate(this.eventData.startDate) : '',
-				endDate: this.eventData.endDate ? this.convertDate(this.eventData.endDate) : '',
+				startDate: this.eventData.startDate ? convertDate(this.eventData.startDate) : '',
+				endDate: this.eventData.endDate ? convertDate(this.eventData.endDate) : '',
 				saveType: saveType,
 			};
 
@@ -112,7 +107,7 @@ export default {
 					await addData(this.url, updatedData);
 					alert('등록이 완료되었습니다');
 				} else {
-					await updateConsults(this.url, this.$route.params.id, updatedData);
+					await updateData(this.url, this.$route.params.id, updatedData);
 					alert('수정이 완료되었습니다');
 				}
 				window.location = `/events/${this.url}`;

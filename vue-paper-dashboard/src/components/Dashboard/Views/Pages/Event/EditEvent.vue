@@ -15,7 +15,7 @@
 
 <script>
 import EventForm from './EventForm';
-import { showDetail } from 'src/api';
+import { getDetailData } from 'src/api';
 
 export default {
 	name: 'EditEvent',
@@ -28,9 +28,8 @@ export default {
 		};
 	},
 	async created() {
-		const { data } = await showDetail('events', this.$route.params.id);
+		const { data } = await getDetailData('events', this.$route.params.id);
 		this.eventData = data.result;
-		console.log(this.eventData);
 	},
 };
 </script>

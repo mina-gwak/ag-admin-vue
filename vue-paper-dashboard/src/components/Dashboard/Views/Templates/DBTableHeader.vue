@@ -28,6 +28,7 @@
 import { DatePicker } from 'element-ui';
 import { Button } from 'src/components/UIComponents';
 import Vue from 'vue';
+import { convertDate } from 'src/util/date';
 
 Vue.use(DatePicker);
 
@@ -45,18 +46,13 @@ export default {
 		};
 	},
 	methods: {
-		convertDate(date) {
-			const offset = new Date().getTimezoneOffset() * 60000;
-			const newDate = new Date(date - offset);
-			return newDate.toISOString().split('T')[0];
-		},
 		setDefaultDate() {
 			const endDate = new Date();
 			const startDate = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() - 6);
 			return [startDate, endDate];
 		},
 		setDateArray() {
-			const convertedDate = this.dateArray.map((date) => this.convertDate(date));
+			const convertedDate = this.dateArray.map((date) => convertDate(date));
 			this.$emit('set-date-array', convertedDate);
 		},
 		completeDistribution() {
