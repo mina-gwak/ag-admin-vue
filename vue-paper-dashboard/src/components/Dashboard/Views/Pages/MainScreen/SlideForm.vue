@@ -50,12 +50,7 @@
 
 		<div class="form-row">
 			<label class="col-12">이미지 업로드</label>
-			<div class="image-container">
-				<label for="image" class="absolute-center"></label>
-				<input id="image" type="file" accept="image/*" @change="handleChange($event)" />
-				<div class="upload-text absolute-center" v-if="slideData.image === undefined">Upload</div>
-				<img v-else :src="slideData.image" class="absolute-center" alt="미리보기" />
-			</div>
+			<ImageUploader property="image" :data-props="slideData" @handle-change="handleChange"></ImageUploader>
 		</div>
 		<div class="button-group">
 			<Button nativeType="submit" @click.prevent="onSubmit">임시저장</Button>
@@ -66,7 +61,7 @@
 
 <script>
 import { addData, updateConsults } from 'src/api';
-import { Button } from 'src/components/UIComponents';
+import { Button, ImageUploader } from 'src/components/UIComponents';
 import { uploadImage } from 'src/util/uploadImage';
 
 export default {
@@ -77,6 +72,7 @@ export default {
 	},
 	components: {
 		Button,
+		ImageUploader,
 	},
 	data() {
 		return {
@@ -115,7 +111,7 @@ export default {
 				alert(error.response.data.message);
 			}
 		},
-		async handleChange(event) {
+		handleChange(event) {
 			const that = this;
 			uploadImage(event, this.slideData).then((newData) => {
 				that.slideData = newData;

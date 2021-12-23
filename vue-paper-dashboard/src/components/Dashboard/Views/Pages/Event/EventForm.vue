@@ -10,12 +10,7 @@
 
 		<div class="form-row">
 			<label class="col-12">이벤트 썸네일</label>
-			<div class="image-container">
-				<label for="thumbnail" class="absolute-center"></label>
-				<input id="thumbnail" type="file" accept="image/*" @change="handleChange($event)" />
-				<div class="upload-text absolute-center" v-if="eventData.thumbnail === undefined">Upload</div>
-				<img v-else :src="eventData.thumbnail" class="absolute-center" alt="미리보기" />
-			</div>
+			<ImageUploader property="thumbnail" :data-props="eventData" @handle-change="handleChange"></ImageUploader>
 		</div>
 
 		<div class="form-row">
@@ -63,12 +58,7 @@
 
 		<div class="form-row">
 			<label class="col-12">이벤트 상세페이지 적용 이미지</label>
-			<div class="image-container">
-				<label for="contentImage" class="absolute-center"></label>
-				<input id="contentImage" type="file" accept="image/*" @change="handleChange($event)" />
-				<div class="upload-text absolute-center" v-if="eventData.contentImage === undefined">Upload</div>
-				<img v-else :src="eventData.contentImage" class="absolute-center" alt="미리보기" />
-			</div>
+			<ImageUploader property="contentImage" :data-props="eventData" @handle-change="handleChange"></ImageUploader>
 		</div>
 
 		<div class="button-group">
@@ -80,7 +70,7 @@
 
 <script>
 import { addData, updateConsults } from 'src/api';
-import { Button } from 'src/components/UIComponents';
+import { Button, ImageUploader } from 'src/components/UIComponents';
 import { uploadImage } from 'src/util/uploadImage';
 
 export default {
@@ -91,6 +81,7 @@ export default {
 	},
 	components: {
 		Button,
+		ImageUploader,
 	},
 	data() {
 		return {
@@ -129,7 +120,7 @@ export default {
 				alert(error.response.data.message);
 			}
 		},
-		async handleChange(event) {
+		handleChange(event) {
 			const that = this;
 			uploadImage(event, this.eventData).then((newData) => {
 				that.eventData = newData;
@@ -145,9 +136,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-input[type=file] {
-	display: none;
-}
 
 .form-row {
 	margin-bottom: 10px;
@@ -172,43 +160,9 @@ input[type=file] {
 	}
 }
 
-.image-container {
-	position: relative;
-	width: 100%;
-	height: 30vh;
-	border: 1px solid #DDD;
-	border-radius: 4px;
-	margin: 0 5px;
-	overflow: hidden;
-
-	label {
-		width: 100%;
-		height: 100%;
-		cursor: pointer;
-		z-index: 3;
-	}
-
-	.upload-text {
-		color: #66615b;
-		cursor: pointer;
-		z-index: 1;
-	}
-
-	img {
-		height: 100%;
-	}
-}
-
 .button-group {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-}
-
-.absolute-center {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 </style>
