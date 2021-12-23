@@ -77,7 +77,7 @@ export default [
     icon: 'nc-icon nc-bell-55',
     children: [{
       name: '이벤트',
-      path: '/table-list/regular',
+      path: '/events/events',
     },
       {
         name: '당첨자발표',

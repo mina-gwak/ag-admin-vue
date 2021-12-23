@@ -37,6 +37,9 @@ import EditVisit from 'src/components/Dashboard/Views/Pages/DB/EditVisit';
 import Slides from 'src/components/Dashboard/Views/Pages/MainScreen/Slides';
 import EditSlides from 'src/components/Dashboard/Views/Pages/MainScreen/EditSlides';
 import AddSlide from 'src/components/Dashboard/Views/Pages/MainScreen/AddSlide';
+import Event from 'src/components/Dashboard/Views/Pages/Event/Event';
+import AddEvent from 'src/components/Dashboard/Views/Pages/Event/AddEvent';
+import EditEvent from 'src/components/Dashboard/Views/Pages/Event/EditEvent';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -255,6 +258,29 @@ let mainScreenMenu = {
   ],
 };
 
+let eventMenu = {
+  path: '/events',
+  component: DashboardLayout,
+  name: 'EventMenu',
+  children: [
+    {
+      path: 'events',
+      name: 'Event',
+      components: { default: Event },
+    },
+    {
+      path: 'events-add',
+      name: 'AddEvent',
+      components: { default: AddEvent },
+    },
+    {
+      path: 'events/:id',
+      name: 'EditEvent',
+      components: { default: EditEvent },
+    },
+  ],
+};
+
 const routes = [
   {
     path: '/',
@@ -277,6 +303,7 @@ const routes = [
   examplesMenu,
   DBMenu,
   mainScreenMenu,
+  eventMenu,
   {
     path: '/admin',
     component: DashboardLayout,

@@ -2,11 +2,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
-				<DBTableHeader :title="title"
-											 @set-date-array="setDateArray"
-											 @complete-distribution="completeDistribution"
-											 @go-edit-page="goEditPage"
-				></DBTableHeader>
+				<EventTableHeader title="이벤트"
+													@set-date-array="setDateArray"
+													@go-add-page="goAddPage"
+													@go-edit-page="goEditPage"
+													@delete-event="deleteEvent"
+				></EventTableHeader>
 				<Table :data="consultData"
 							 :index="index"
 							 @change-selection="changeSelection"
@@ -27,23 +28,22 @@
 </template>
 
 <script>
-import { filterConsults, completeDistribution, showDetail } from 'src/api';
+import { getData, showDetail, deleteData } from 'src/api';
 import Table from 'src/components/Dashboard/Views/Templates/Table';
-import DBTableHeader from 'src/components/Dashboard/Views/Templates/DBTableHeader';
+import EventTableHeader from 'src/components/Dashboard/Views/Templates/EventTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
 import router from 'src/main';
+import tableIndex from 'src/assets/data';
 
 export default {
-	name: 'ShowDBTable',
+	name: 'Event',
 	props: {
 		title: String,
-		url: String,
-		index: Array,
 		routerName: String,
 	},
 	components: {
 		Table,
-		DBTableHeader,
+		EventTableHeader,
 		Modal,
 	},
 	data() {
@@ -53,16 +53,18 @@ export default {
 			selections: [],
 			isModalOpen: false,
 			modalContent: {},
+			url: 'events',
+			index: tableIndex.events,
 		};
 	},
 	methods: {
 		setDateArray(dateArray) {
 			this.date = dateArray;
 		},
-		async getFilteredData() {
+		async getConsultData() {
 			try {
-				const { data } = await filterConsults(this.url, ...this.date);
-				this.consultData = data.result;
+				const { data } = await getData(this.url);
+				this.setIdx(data.result);
 			} catch (error) {
 				console.log(error.response);
 			}
@@ -70,25 +72,13 @@ export default {
 		changeSelection(selections) {
 			this.selections = selections;
 		},
-		async completeDistribution() {
-			try {
-				if (this.selections.length === 0) {
-					alert('선택된 데이터가 없습니다');
-				} else {
-					for (let i = 0; i < this.selections.length; i++) {
-						const response = await completeDistribution(this.url, this.selections[i].idx);
-						if (response.data.status !== '200') {
-							alert(response.data.message);
-							await this.getFilteredData();
-							return;
-						}
-					}
-					alert('배분완료되었습니다');
-					await this.getFilteredData();
-				}
-			} catch (error) {
-				console.log(error.message);
-			}
+		setIdx(result) {
+			this.consultData = result.map((item) => {
+				return {
+					...item,
+					idx: item.eventIdx,
+				};
+			});
 		},
 		async showModal(idx) {
 			this.isModalOpen = true;
@@ -111,22 +101,47 @@ export default {
 			}
 
 			await router.push({
-				name: this.routerName,
+				name: 'EditEvent',
 				params: {
 					id: this.selections[0].idx,
 				},
 			});
 		},
+		goAddPage() {
+			router.replace({
+				name: 'AddEvent',
+			});
+		},
+		async deleteEvent() {
+			try {
+				if (this.selections.length === 0) {
+					alert('선택된 데이터가 없습니다');
+				} else {
+					for (let i = 0; i < this.selections.length; i++) {
+						const response = await deleteData(this.url, this.selections[i].idx);
+						if (response.data.status !== '200') {
+							alert(response.data.message);
+							await this.getConsultData();
+							return;
+						}
+					}
+					alert('이벤트가 삭제되었습니다');
+					await this.getConsultData();
+				}
+			} catch (error) {
+				console.log(error.message);
+			}
+		}
 	},
-	mounted() {
-		this.getFilteredData();
+	created() {
+		this.getConsultData();
 	},
 	computed: {
 		changeSelect() {
 			return this.selections;
 		},
 	},
-	emit: ['set-date-array', 'complete-distribution', 'show-modal', 'close-modal', 'go-edit-page'],
+	emit: ['set-date-array', 'go-add-page', 'go-edit-page', 'delete-event', 'change-selection', 'show-modal', 'close-modal' ],
 };
 </script>
 

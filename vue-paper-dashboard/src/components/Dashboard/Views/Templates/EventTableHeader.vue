@@ -18,8 +18,9 @@
 				<Button type="success" @click="setDateArray">조회</Button>
 			</div>
 			<div class="table-btn-group">
-				<Button type="default" @click="completeDistribution">배분 완료</Button>
+				<Button type="default" @click="goAddPage">등록</Button>
 				<Button type="default" @click="goEditPage">수정</Button>
+				<Button type="default" @click="deleteEvent">삭제</Button>
 			</div>
 		</div>
 	</div>
@@ -32,12 +33,12 @@ import Vue from 'vue';
 Vue.use(DatePicker);
 
 export default {
-	name: 'DBTableHeader',
+	name: 'EventTableHeader',
 	props: {
 		title: String,
 	},
 	components: {
-		Button
+		Button,
 	},
 	data() {
 		return {
@@ -59,11 +60,14 @@ export default {
 			const convertedDate = this.dateArray.map((date) => this.convertDate(date));
 			this.$emit('set-date-array', convertedDate);
 		},
-		completeDistribution() {
-			this.$emit('complete-distribution');
+		goAddPage() {
+			this.$emit('go-add-page');
 		},
 		goEditPage() {
 			this.$emit('go-edit-page');
+		},
+		deleteEvent() {
+			this.$emit('delete-event');
 		},
 	},
 	created() {

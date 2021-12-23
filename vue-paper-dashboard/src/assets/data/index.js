@@ -157,6 +157,28 @@ const tableIndex = {
       type: 'date',
     },
   ],
+  events: [
+    {
+      label: '이벤트명',
+      property: 'title',
+      type: 'text',
+    },
+    {
+      label: '내용',
+      property: 'content',
+      type: 'text',
+    },
+    {
+      label: '시작일',
+      property: 'startDate',
+      type: 'text',
+    },
+    {
+      label: '종료일',
+      property: 'endDate',
+      type: 'text',
+    },
+  ],
 };
 
 export default tableIndex;

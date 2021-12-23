@@ -53,4 +53,8 @@ function addData(url, data) {
   });
 }
 
-export { getData, filterConsults, completeDistribution, showDetail, updateConsults, loginUser, endPosting, addData };
+function deleteData(url, id) {
+  return instance.delete(`${url}/${id}`);
+}
+
+export { getData, filterConsults, completeDistribution, showDetail, updateConsults, loginUser, endPosting, addData, deleteData };
