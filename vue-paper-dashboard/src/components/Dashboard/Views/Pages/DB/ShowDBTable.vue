@@ -58,6 +58,7 @@ export default {
 	methods: {
 		setDateArray(dateArray) {
 			this.date = dateArray;
+			this.getFilteredData();
 		},
 		async getFilteredData() {
 			try {
@@ -117,9 +118,6 @@ export default {
 				},
 			});
 		},
-	},
-	mounted() {
-		this.getFilteredData();
 	},
 	computed: {
 		changeSelect() {
