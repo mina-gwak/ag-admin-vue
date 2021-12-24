@@ -20,7 +20,8 @@
 			<ul class="content-list">
 				<li v-for="data in index">
 					<p>{{ data.label }}</p>
-					<p>{{ modalContent[data.property] ? modalContent[data.property] : '-' }}</p>
+					<p v-if="data.type !== 'img'">{{ modalContent[data.property] ? modalContent[data.property] : '-' }}</p>
+					<img v-else :src="modalContent[data.property]" :alt="data.label" />
 				</li>
 			</ul>
 		</Modal>
@@ -117,6 +118,7 @@ export default {
 				if (this.selections.length === 0) {
 					alert('선택된 데이터가 없습니다');
 				} else {
+					if (!confirm('정말 삭제하시겠습니까?')) return;
 					for (let i = 0; i < this.selections.length; i++) {
 						const response = await deleteData(this.url, this.selections[i].idx);
 						if (response.data.status !== '200') {
@@ -131,7 +133,7 @@ export default {
 			} catch (error) {
 				console.log(error.message);
 			}
-		}
+		},
 	},
 	created() {
 		this.getConsultData();
@@ -141,7 +143,7 @@ export default {
 			return this.selections;
 		},
 	},
-	emit: ['set-date-array', 'go-add-page', 'go-edit-page', 'delete-event', 'change-selection', 'show-modal', 'close-modal' ],
+	emit: ['set-date-array', 'go-add-page', 'go-edit-page', 'delete-event', 'change-selection', 'show-modal', 'close-modal'],
 };
 </script>
 

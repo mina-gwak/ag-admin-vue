@@ -106,8 +106,17 @@ export default {
 	},
 };
 </script>
-<style>
+<style lang="scss">
 .modal.show {
 	background-color: rgba(0, 0, 0, 0.3)
+}
+
+.modal-body {
+	max-height: 50vh;
+	overflow: scroll;
+
+	img {
+		max-width: 70%;
+	}
 }
 </style>

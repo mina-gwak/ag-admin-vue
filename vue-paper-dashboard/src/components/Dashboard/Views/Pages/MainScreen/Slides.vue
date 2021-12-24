@@ -19,7 +19,8 @@
 			<ul class="content-list">
 				<li v-for="data in index">
 					<p>{{ data.label }}</p>
-					<p>{{ modalContent[data.property] ? modalContent[data.property] : '-' }}</p>
+					<p v-if="data.type !== 'img'">{{ modalContent[data.property] ? modalContent[data.property] : '-' }}</p>
+					<img v-else :src="modalContent[data.property]" :alt="data.label" />
 				</li>
 			</ul>
 		</Modal>

@@ -4,6 +4,7 @@
 			<el-table-column type="selection"></el-table-column>
 			<el-table-column type="index" label="NO" width="70"></el-table-column>
 			<el-table-column v-for="item in index"
+											 v-if="!item.hide"
 											 :label="item.label"
 											 :property="item.property"
 											 :key="item.idx"
@@ -30,8 +31,8 @@ export default {
 		},
 		showModal(data) {
 			this.$emit('show-modal', data.idx);
-		}
-	}
+		},
+	},
 };
 </script>
 

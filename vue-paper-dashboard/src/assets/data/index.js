@@ -130,16 +130,19 @@ const tableIndex = {
       label: '제목',
       property: 'title',
       type: 'text',
+      hide: false,
     },
     {
       label: '상태',
       property: 'saveType',
       type: 'text',
+      hide: false,
     },
     {
       label: '링크페이지',
       property: 'link',
       type: 'text',
+      hide: false,
     },
     {
       label: '내용',
@@ -150,11 +153,19 @@ const tableIndex = {
       label: '게시시작일',
       property: 'startDate',
       type: 'date',
+      hide: false,
     },
     {
       label: '게시종료일',
       property: 'endDate',
       type: 'date',
+      hide: false,
+    },
+    {
+      label: '이미지',
+      property: 'image',
+      type: 'img',
+      hide: true,
     },
   ],
   events: [
@@ -162,21 +173,43 @@ const tableIndex = {
       label: '이벤트명',
       property: 'title',
       type: 'text',
+      hide: false,
     },
     {
       label: '내용',
       property: 'content',
       type: 'text',
+      hide: false,
     },
     {
       label: '시작일',
       property: 'startDate',
       type: 'text',
+      hide: false,
     },
     {
       label: '종료일',
       property: 'endDate',
       type: 'text',
+      hide: false,
+    },
+    {
+      label: '링크',
+      property: 'link',
+      type: 'text',
+      hide: true,
+    },
+    {
+      label: '썸네일',
+      property: 'thumbnail',
+      type: 'img',
+      hide: true,
+    },
+    {
+      label: '상세 이미지',
+      property: 'contentImage',
+      type: 'img',
+      hide: true,
     },
   ],
 };
