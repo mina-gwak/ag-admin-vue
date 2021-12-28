@@ -2,50 +2,63 @@
 	<form @submit.prevent="onSubmit">
 		<template v-for="data in consultData">
 
-			<fg-input v-if="data.type === 'text' && data.property === 'phoneNumber'"
-								class="col-sm-6 col-12"
-								:label="data.label"
-								v-model="data.value"
-								:type="data.type"
-								:auto-hypen="autoHypen">
-			</fg-input>
+			<div class="form-row"
+					 v-if="data.type === 'text' && data.property === 'phoneNumber'">
+				<fg-input class="col-sm-6 col-12"
+									:label="data.label"
+									v-model="data.value"
+									:type="data.type"
+									:auto-hypen="autoHypen">
+				</fg-input>
+			</div>
 
-			<fg-input v-else-if="data.type === 'text'"
-								class="col-sm-6 col-12"
-								:label="data.label"
-								v-model="data.value"
-								:type="data.type">
-			</fg-input>
+			<div class="form-row"
+					 v-else-if="data.type === 'text'">
+				<fg-input class="col-sm-6 col-12"
+									:label="data.label"
+									v-model="data.value"
+									:type="data.type">
+				</fg-input>
+			</div>
 
-			<fg-input v-else-if="data.type === 'date' && data.property !== 'distributionDate'"
-								class="col-sm-6 col-12"
-								:label="data.label"
-								v-model="data.value"
-								:disabled="true"
-								:type="data.type">
-			</fg-input>
+			<div class="form-row"
+					 v-else-if="data.type === 'date' && data.property !== 'distributionDate'">
+				<fg-input class="col-sm-6 col-12"
+									:label="data.label"
+									v-model="data.value"
+									:disabled="true"
+									:type="data.type">
+				</fg-input>
+			</div>
 
-			<div v-else-if="data.type === 'checkbox' && options[data.property]"
-					 class="form-group col-sm-6 col-12 has-label">
-				<label>{{ data.label }}</label>
-				<div v-for="option in options[data.property]">
-					<Radio v-model="data.value" :value="option.value" :label="option.value" :inline="true" >{{ option.label }}</Radio>
+			<div class="form-row"
+					 v-else-if="data.type === 'checkbox' && options[data.property]">
+				<div class="form-group col-sm-6 col-12 has-label">
+					<label>{{ data.label }}</label>
+					<div v-for="option in options[data.property]">
+						<Radio v-model="data.value" :value="option.value" :label="option.value" :inline="true" >{{ option.label }}</Radio>
+					</div>
 				</div>
 			</div>
 
-			<div v-else-if="data.type === 'checkbox'"
-					 class="form-group col-sm-6 col-12 has-label">
-				<label>{{ data.label }}</label>
-				<div>
-					<Checkbox v-model="data.value" :inline="true" >동의</Checkbox>
+			<div class="form-row"
+					 v-else-if="data.type === 'checkbox'">
+				<div class="form-group col-sm-6 col-12 has-label">
+					<label>{{ data.label }}</label>
+					<div>
+						<Checkbox v-model="data.value" :inline="true" >동의</Checkbox>
+					</div>
 				</div>
 			</div>
 
-			<div v-else-if="data.type === 'select'"
-					 class="form-group col-sm-6 col-12 has-label select">
-				<label>{{ data.label }}</label>
-				<Select :options="options[data.property]" v-model="data.value"></Select>
+			<div class="form-row"
+					 v-else-if="data.type === 'select'">
+				<div class="form-group col-sm-6 col-12 has-label select">
+					<label>{{ data.label }}</label>
+					<Select :options="options[data.property]" v-model="data.value"></Select>
+				</div>
 			</div>
+
 		</template>
 
 		<Button nativeType="submit">수정</Button>
@@ -136,4 +149,7 @@ export default {
 </script>
 
 <style scoped>
+.form-row {
+	margin-bottom: 10px;
+}
 </style>
