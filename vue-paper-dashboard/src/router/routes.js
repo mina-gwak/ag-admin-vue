@@ -41,6 +41,7 @@ import Event from 'src/components/Dashboard/Views/Pages/Event/Event';
 import AddEvent from 'src/components/Dashboard/Views/Pages/Event/AddEvent';
 import EditEvent from 'src/components/Dashboard/Views/Pages/Event/EditEvent';
 import OwnProducts from 'src/components/Dashboard/Views/Pages/Product/OwnProducts';
+import AddProduct from 'src/components/Dashboard/Views/Pages/Product/AddProduct';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -292,6 +293,11 @@ let productMenu = {
       name: 'OwnProducts',
       components: { default: OwnProducts },
     },
+    {
+      path: 'own-products-add',
+      name: 'AddProduct',
+      components: { default: AddProduct },
+    }
   ],
 };
 

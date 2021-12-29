@@ -8,7 +8,7 @@
 				<div class="card-body">
 					<div class="content-header">
 						<Tabs :tabs="tabs" @active-tab="activeTab" :align-left="true"></Tabs>
-						<Button type="default">등록</Button>
+						<Button type="default" @click="goToAddPage">등록</Button>
 					</div>
 					<div class="content">
 						<ProductItem></ProductItem>
@@ -25,6 +25,7 @@
 <script>
 import { Button, Tabs } from 'src/components/UIComponents';
 import ProductItem from './ProductItem';
+import router from 'src/main';
 
 export default {
 	name: 'OwnProduct',
@@ -59,6 +60,11 @@ export default {
 		activeTab(tab) {
 			console.log(tab);
 		},
+		goToAddPage() {
+			router.replace({
+				name: 'AddProduct',
+			});
+		}
 	},
 	emit: ['active-tab'],
 };
