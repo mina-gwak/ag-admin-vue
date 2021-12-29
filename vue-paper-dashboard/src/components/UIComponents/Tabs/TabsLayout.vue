@@ -1,7 +1,7 @@
 <template>
   <div :class="vertical ? 'row' : ''">
     <div :class="vertical ? verticalNavClasses : ''">
-      <div class="nav-tabs-navigation" :class="{'verical-navs': vertical}">
+      <div class="nav-tabs-navigation" :class="{'verical-navs': vertical, 'align-left': alignLeft}">
         <div class="nav-tabs-wrapper">
           <slot name="nav"></slot>
         </div>
@@ -20,6 +20,7 @@
       vertical: Boolean,
       verticalNavClasses: [String, Object],
       verticalTabContentClasses: [String, Object],
+			alignLeft: Boolean,
     }
   }
 </script>

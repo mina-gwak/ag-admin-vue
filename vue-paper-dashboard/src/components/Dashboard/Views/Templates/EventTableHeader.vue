@@ -18,9 +18,10 @@
 				<Button type="success" @click="setDateArray">조회</Button>
 			</div>
 			<div class="table-btn-group">
-				<Button type="default" @click="goAddPage">등록</Button>
+				<Button type="default" @click="goAddPage" outline>등록</Button>
 				<Button type="default" @click="goEditPage">수정</Button>
 				<Button type="default" @click="deleteEvent">삭제</Button>
+				<Button type="default" @click="deleteEvent">종료</Button>
 			</div>
 		</div>
 	</div>

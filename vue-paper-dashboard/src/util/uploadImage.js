@@ -10,12 +10,13 @@ function updateAWS() {
 
 function getPromise(event) {
   const imageFile = event.target.files[0];
+  const folder = event.target.id;
   if (!imageFile) return;
   
   return new AWS.S3.ManagedUpload({
     params: {
       Bucket: 'ag-admin-image',
-      Key: imageFile.name,
+      Key: `${folder}/${imageFile.name}`,
       Body: imageFile,
     },
   }).promise();
@@ -26,7 +27,7 @@ function uploadImage(event, info) {
   updateAWS();
   const upload = getPromise(event);
   const property = event.target.id;
-  
+
   return upload.then(
     function(data) {
       return {

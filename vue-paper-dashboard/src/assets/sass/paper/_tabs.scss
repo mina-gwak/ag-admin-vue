@@ -3,7 +3,7 @@
 .nav-tabs-navigation{
   text-align: center;
   border-bottom: 1px solid $medium-pale-bg;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   .nav > .nav-item > .nav-link{
     padding-bottom: 20px;
@@ -52,8 +52,9 @@
         content: "";
         display: inline-block;
         position: absolute;
-        right: 40%;
+        right: 50%;
         bottom: 5px;
+        transform: translateX(50%);
       }
 
       &:before{
@@ -63,8 +64,9 @@
         content: "";
         display: inline-block;
         position: absolute;
-        right: 40%;
+        right: 50%;
         bottom: 6px;
+        transform: translateX(50%);
       }
     }
 
@@ -122,7 +124,7 @@
 
   > li > a{
     display: block;
-    padding: 0px $padding-base-horizontal;
+    padding: 0 $padding-base-horizontal;
     color: $dark-gray;
     text-align: center;
     @include opacity(0.8);
@@ -244,4 +246,8 @@
   .nav-tabs-wrapper{
     width: 100%;
   }
+}
+
+.nav-tabs-navigation.align-left {
+  text-align: left;
 }

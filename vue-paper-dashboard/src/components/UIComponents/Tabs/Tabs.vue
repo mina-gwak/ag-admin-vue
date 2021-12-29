@@ -2,7 +2,8 @@
   <component :is="layoutComponent"
              :vertical-nav-classes="verticalNavClasses"
              :vertical-tab-content-classes="verticalTabContentClasses"
-             :vertical="vertical">
+             :vertical="vertical"
+						 :alignLeft="alignLeft">
     <template slot="nav">
       <ul class="nav"
           role="tablist"
@@ -11,7 +12,6 @@
               pills ? 'nav-pills': 'nav-tabs',
              {'nav-pills-icons': icons},
              {'flex-column nav-stacked': vertical},
-             {'justify-content-center': centered},
              tabNavClasses
             ]">
 
@@ -52,7 +52,7 @@
       TabItemContent: {
         props: ['tab'],
         render(h) {
-          return h('div', [this.tab.$slots.title || this.tab.title])
+          return h('div', [this.tab.title])
         }
       }
     },
@@ -126,11 +126,16 @@
       value: {
         type: String,
         description: 'Initial value (active tab)'
-      }
+      },
+			tabs: Array,
+			alignLeft: {
+				type: Boolean,
+				description: 'Text Align Left Tab content css classes'
+			}
     },
     data() {
       return {
-        tabs: []
+        // tabs: []
       }
     },
     methods: {
@@ -144,8 +149,9 @@
         if (this.handleClick) {
           this.handleClick(tab)
         }
-        this.deactivateTabs()
-        tab.active = true
+        this.deactivateTabs();
+        tab.active = true;
+				this.$emit('active-tab', tab);
       },
       deactivateTabs() {
         this.tabs.forEach(tab => {

@@ -40,6 +40,7 @@ import AddSlide from 'src/components/Dashboard/Views/Pages/MainScreen/AddSlide';
 import Event from 'src/components/Dashboard/Views/Pages/Event/Event';
 import AddEvent from 'src/components/Dashboard/Views/Pages/Event/AddEvent';
 import EditEvent from 'src/components/Dashboard/Views/Pages/Event/EditEvent';
+import OwnProducts from 'src/components/Dashboard/Views/Pages/Product/OwnProducts';
 
 // TableList pages
 const RegularTables = () => import(/* webpackChunkName: "tables" */ 'src/components/Dashboard/Views/Tables/RegularTables.vue');
@@ -281,6 +282,19 @@ let eventMenu = {
   ],
 };
 
+let productMenu = {
+  path: '/product',
+  component: DashboardLayout,
+  name: 'ProductMenu',
+  children: [
+    {
+      path: 'own-products',
+      name: 'OwnProducts',
+      components: { default: OwnProducts },
+    },
+  ],
+};
+
 const routes = [
   {
     path: '/',
@@ -304,6 +318,7 @@ const routes = [
   DBMenu,
   mainScreenMenu,
   eventMenu,
+  productMenu,
   {
     path: '/admin',
     component: DashboardLayout,

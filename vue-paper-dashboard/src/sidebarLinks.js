@@ -27,6 +27,11 @@ export default [
     ],
   },
   {
+    name: '보유차량리스트',
+    icon: 'nc-icon nc-single-copy-04',
+    path: '/product/own-products',
+  },
+  {
     name: '메인화면',
     icon: 'nc-icon nc-tv-2',
     children: [
@@ -57,7 +62,7 @@ export default [
       }],
   },
   {
-    name: 'Best Selling',
+    name: 'Team Pincar Pick',
     icon: 'nc-icon nc-trophy',
     children: [{
       name: 'SUV',
