@@ -2,106 +2,106 @@ const tableIndex = {
   kakao: [
     {
       label: '접수일자',
-      property: 'receiptDate',
+      property: 'created_at',
       type: 'date',
     },
     {
       label: '카카오톡ID',
-      property: 'kakaotalkId',
+      property: 'kakao_id',
       type: 'text',
     },
     {
       label: '문의차량',
-      property: 'inquiryVehicle',
+      property: 'car_name',
       type: 'text',
     },
     {
       label: '배분여부',
-      property: 'isDistribution',
+      property: 'division_complete',
       type: 'checkbox',
     },
     {
       label: '배분일자',
-      property: 'distributionDate',
+      property: 'division_at',
       type: 'date',
     },
   ],
-  estimateInquiries: [
+  estimate: [
     {
       label: '접수일자',
-      property: 'receiptDate',
+      property: 'created_at',
       type: 'date',
     },
     {
       label: '이름',
-      property: 'name',
+      property: 'customer_name',
       type: 'text',
     },
     {
       label: '전화번호',
-      property: 'phoneNumber',
+      property: 'customer_phone',
       type: 'text',
     },
     {
       label: '렌트 / 리스',
-      property: 'purchaseType',
+      property: 'purchase_type',
       type: 'select',
     },
     {
       label: '상담가능시간',
-      property: 'consultTime',
+      property: 'cont_time',
       type: 'select',
     },
     {
       label: '상품',
-      property: 'vehicleType',
+      property: 'location_type',
       type: 'select',
     },
     {
       label: '문의내용',
-      property: 'consultContent',
+      property: 'content',
       type: 'textarea',
     },
     {
       label: '상담방식',
-      property: 'consultType',
+      property: 'consult_type',
       type: 'checkbox',
     },
     {
       label: '개인정보취급',
-      property: 'isAgreeToPrivacyPolicy',
+      property: 'personal_info_check',
       type: 'checkbox',
     },
     {
       label: '마케팅',
-      property: 'isAgreeToMarketing',
+      property: 'marketing_info_check',
       type: 'checkbox',
     },
     {
       label: '배분여부',
-      property: 'isDistribution',
+      property: 'division_complete',
       type: 'checkbox',
     },
     {
       label: '배분일자',
-      property: 'distributionDate',
+      property: 'division_at',
       type: 'date',
     },
   ],
   visit: [
     {
       label: '요청일시',
-      property: 'receiptDate',
+      property: 'created_at',
       type: 'date',
     },
     {
       label: '이름',
-      property: 'name',
+      property: 'customer_name',
       type: 'text',
     },
     {
       label: '전화번호',
-      property: 'phoneNumber',
+      property: 'customer_phone',
       type: 'text',
     },
     {
@@ -111,17 +111,17 @@ const tableIndex = {
     },
     {
       label: '개인정보',
-      property: 'isAgreeToPrivacyPolicy',
+      property: 'personal_info_check',
       type: 'checkbox',
     },
     {
       label: '마케팅',
-      property: 'isAgreeToMarketing',
+      property: 'marketing_info_check',
       type: 'checkbox',
     },
     {
       label: '배분여부',
-      property: 'isDistribution',
+      property: 'division_complete',
       type: 'checkbox',
     },
   ],
@@ -134,7 +134,7 @@ const tableIndex = {
     },
     {
       label: '상태',
-      property: 'saveType',
+      property: 'status',
       type: 'text',
       hide: false,
     },
@@ -151,13 +151,13 @@ const tableIndex = {
     },
     {
       label: '게시시작일',
-      property: 'startDate',
+      property: 'start_at',
       type: 'date',
       hide: false,
     },
     {
       label: '게시종료일',
-      property: 'endDate',
+      property: 'end_at',
       type: 'date',
       hide: false,
     },
@@ -201,16 +201,21 @@ const tableIndex = {
     },
     {
       label: '썸네일',
-      property: 'thumbnail',
+      property: 'mainImage',
       type: 'img',
       hide: true,
     },
     {
       label: '상세 이미지',
-      property: 'contentImage',
+      property: 'detailImage',
       type: 'img',
       hide: true,
     },
+    {
+      label: '상태',
+      property: 'eventStatus',
+      hide: false,
+    }
   ],
 };
 

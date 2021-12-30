@@ -7,7 +7,7 @@
 											 v-if="!item.hide"
 											 :label="item.label"
 											 :property="item.property"
-											 :key="item.idx"
+											 :key="item.id"
 			></el-table-column>
 		</el-table>
 	</div>
@@ -30,7 +30,15 @@ export default {
 			this.$emit('change-selection', val);
 		},
 		showModal(data) {
-			this.$emit('show-modal', data.idx);
+			if (data.id) {
+				this.$emit('show-modal', data.id);
+			} else {
+				Object.keys(data).forEach((key) => {
+					if (key.includes('Id') || key.includes('id')) {
+						this.$emit('show-modal', data[key]);
+					}
+				})
+			}
 		},
 	},
 };

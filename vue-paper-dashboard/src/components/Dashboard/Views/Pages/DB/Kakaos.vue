@@ -1,8 +1,9 @@
 <template>
-	<ShowDBTable title="방문상담 상담접수 목록"
+	<ShowDBTable title="카카오톡 상담접수 목록"
 							 :url="url"
 							 :index="index"
-							 routerName="EditVisit"
+							 routerName="EditKakao"
+							 array-name="kakaoConsultResList"
 	></ShowDBTable>
 </template>
 
@@ -11,14 +12,14 @@ import ShowDBTable from './ShowDBTable';
 import tableIndex from 'src/assets/data';
 
 export default {
-	name: 'Visit',
+	name: 'Kakaos',
 	components: {
 		ShowDBTable,
 	},
 	data() {
 		return {
-			url: 'visit-consults',
-			index: tableIndex.visit,
+			url: 'kakaos',
+			index: tableIndex.kakao,
 		};
 	}
 };

@@ -18,7 +18,7 @@
 		<Modal :show="isModalOpen" @close-modal="closeModal">
 			<h1 slot="header">상세 내역 조회</h1>
 			<ul class="content-list">
-				<li v-for="data in index">
+				<li v-for="data in index" v-if="data.property !== 'eventStatus'">
 					<p>{{ data.label }}</p>
 					<p v-if="data.type !== 'img'">{{ modalContent[data.property] ? modalContent[data.property] : '-' }}</p>
 					<img v-else :src="modalContent[data.property]" :alt="data.label" />
@@ -61,11 +61,12 @@ export default {
 	methods: {
 		setDateArray(dateArray) {
 			this.date = dateArray;
+			this.setData();
 		},
-		async getConsultData() {
+		async setData() {
 			try {
-				const { data } = await getData(this.url);
-				this.setIdx(data.result);
+				const { data } = await getData(this.url, ...this.date);
+				this.consultData = data.result.eventListResList;
 			} catch (error) {
 				console.log(error.response);
 			}
@@ -73,17 +74,9 @@ export default {
 		changeSelection(selections) {
 			this.selections = selections;
 		},
-		setIdx(result) {
-			this.consultData = result.map((item) => {
-				return {
-					...item,
-					idx: item.eventIdx,
-				};
-			});
-		},
-		async showModal(idx) {
+		async showModal(id) {
 			this.isModalOpen = true;
-			const { data } = await getDetailData(this.url, idx);
+			const { data } = await getDetailData(this.url, id);
 			this.modalContent = data.result;
 		},
 		closeModal() {
@@ -97,14 +90,14 @@ export default {
 
 			if (this.selections.length > 1) {
 				alert('한 개의 상담내역만 선택해주세요');
-				await this.getConsultData();
+				await this.setData();
 				return;
 			}
 
 			await router.push({
 				name: 'EditEvent',
 				params: {
-					id: this.selections[0].idx,
+					id: this.selections[0].eventIdx,
 				},
 			});
 		},
@@ -120,23 +113,20 @@ export default {
 				} else {
 					if (!confirm('정말 삭제하시겠습니까?')) return;
 					for (let i = 0; i < this.selections.length; i++) {
-						const response = await deleteData(this.url, this.selections[i].idx);
-						if (response.data.status !== '200') {
+						const response = await deleteData(this.url, this.selections[i].eventIdx);
+						if (response.data.code !== 'OK') {
 							alert(response.data.message);
-							await this.getConsultData();
+							await this.setData();
 							return;
 						}
 					}
 					alert('이벤트가 삭제되었습니다');
-					await this.getConsultData();
+					await this.setData();
 				}
 			} catch (error) {
-				console.log(error.message);
+				console.log(error);
 			}
 		},
-	},
-	created() {
-		this.getConsultData();
 	},
 	computed: {
 		changeSelect() {

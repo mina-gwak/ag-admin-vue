@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { getDetailData, filterData, completeDistribution } from 'src/api';
+import { getData, getDetailData, completeDistribution } from 'src/api';
 import Table from 'src/components/Dashboard/Views/Templates/Table';
 import DBTableHeader from 'src/components/Dashboard/Views/Templates/DBTableHeader';
 import Modal from 'src/components/UIComponents/Modal';
@@ -40,6 +40,7 @@ export default {
 		url: String,
 		index: Array,
 		routerName: String,
+		arrayName: String,
 	},
 	components: {
 		Table,
@@ -58,12 +59,12 @@ export default {
 	methods: {
 		setDateArray(dateArray) {
 			this.date = dateArray;
-			this.getFilteredData();
+			this.setData();
 		},
-		async getFilteredData() {
+		async setData() {
 			try {
-				const { data } = await filterData(this.url, ...this.date);
-				this.consultData = data.result;
+				const { data } = await getData(this.url, ...this.date);
+				this.consultData = data.result[this.arrayName];
 			} catch (error) {
 				console.log(error.response);
 			}
@@ -77,23 +78,23 @@ export default {
 					alert('선택된 데이터가 없습니다');
 				} else {
 					for (let i = 0; i < this.selections.length; i++) {
-						const response = await completeDistribution(this.url, this.selections[i].idx);
+						const response = await completeDistribution(this.url, this.selections[i].id);
 						if (response.data.status !== '200') {
 							alert(response.data.message);
-							await this.getFilteredData();
+							await this.setData();
 							return;
 						}
 					}
 					alert('배분완료되었습니다');
-					await this.getFilteredData();
+					await this.setData();
 				}
 			} catch (error) {
 				console.log(error.message);
 			}
 		},
-		async showModal(idx) {
+		async showModal(id) {
 			this.isModalOpen = true;
-			const { data } = await getDetailData(this.url, idx);
+			const { data } = await getDetailData(this.url, id);
 			this.modalContent = data.result;
 		},
 		closeModal() {
@@ -107,14 +108,14 @@ export default {
 
 			if (this.selections.length > 1) {
 				alert('한 개의 상담내역만 선택해주세요');
-				await this.getConsultData();
+				await this.setData();
 				return;
 			}
 
 			await router.push({
 				name: this.routerName,
 				params: {
-					id: this.selections[0].idx,
+					id: this.selections[0].id,
 				},
 			});
 		},

@@ -10,11 +10,11 @@ export default [
     children: [
       {
         name: '카카오톡',
-        path: '/db/kakao-consults',
+        path: '/db/kakaos',
       },
       {
         name: '견적문의',
-        path: '/db/estimate-inquiries',
+        path: '/db/estimates',
       },
       {
         name: '상세견적',
@@ -22,7 +22,7 @@ export default [
       },
       {
         name: '방문상담',
-        path: '/db/visit-consults',
+        path: '/db/visits',
       },
     ],
   },

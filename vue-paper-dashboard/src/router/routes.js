@@ -28,16 +28,16 @@ import SweetAlert from 'src/components/Dashboard/Views/Components/SweetAlert.vue
 import Notifications from 'src/components/Dashboard/Views/Components/Notifications.vue';
 import Icons from 'src/components/Dashboard/Views/Components/Icons.vue';
 import Typography from 'src/components/Dashboard/Views/Components/Typography.vue';
-import Kakao from 'src/components/Dashboard/Views/Pages/DB/Kakao';
-import EditKakaoConsult from 'src/components/Dashboard/Views/Pages/DB/EditKakaoConsult';
-import EstimateInquiries from 'src/components/Dashboard/Views/Pages/DB/EstimateInquiries';
-import Visit from 'src/components/Dashboard/Views/Pages/DB/Visit';
-import EditEstimateInquiries from 'src/components/Dashboard/Views/Pages/DB/EditEstimateInquiries';
+import Kakaos from 'src/components/Dashboard/Views/Pages/DB/Kakaos';
+import EditKakao from 'src/components/Dashboard/Views/Pages/DB/EditKakao';
+import Estimates from 'src/components/Dashboard/Views/Pages/DB/Estimates';
+import Visits from 'src/components/Dashboard/Views/Pages/DB/Visits';
+import EditEstimate from 'src/components/Dashboard/Views/Pages/DB/EditEstimate';
 import EditVisit from 'src/components/Dashboard/Views/Pages/DB/EditVisit';
 import Slides from 'src/components/Dashboard/Views/Pages/MainScreen/Slides';
 import EditSlides from 'src/components/Dashboard/Views/Pages/MainScreen/EditSlides';
 import AddSlide from 'src/components/Dashboard/Views/Pages/MainScreen/AddSlide';
-import Event from 'src/components/Dashboard/Views/Pages/Event/Event';
+import Events from 'src/components/Dashboard/Views/Pages/Event/Events';
 import AddEvent from 'src/components/Dashboard/Views/Pages/Event/AddEvent';
 import EditEvent from 'src/components/Dashboard/Views/Pages/Event/EditEvent';
 import OwnProducts from 'src/components/Dashboard/Views/Pages/Product/OwnProducts';
@@ -204,33 +204,33 @@ let DBMenu = {
   name: 'DB',
   children: [
     {
-      path: 'kakao-consults',
-      name: 'Kakao',
-      components: { default: Kakao },
+      path: 'kakaos',
+      name: 'Kakaos',
+      components: { default: Kakaos },
     },
     {
-      path: 'kakao-consults/:id',
-      name: 'EditKakaoConsult',
-      components: { default: EditKakaoConsult },
+      path: 'kakaos/:id',
+      name: 'EditKakao',
+      components: { default: EditKakao },
       props: true,
     },
     {
-      path: 'estimate-inquiries',
-      name: 'EstimateInquiries',
-      components: { default: EstimateInquiries },
+      path: 'estimates',
+      name: 'Estimates',
+      components: { default: Estimates },
     },
     {
-      path: 'estimate-inquiries/:id',
-      name: 'EditEstimateInquiries',
-      components: { default: EditEstimateInquiries },
+      path: 'estimates/:id',
+      name: 'EditEstimate',
+      components: { default: EditEstimate },
     },
     {
-      path: 'visit-consults',
-      name: 'Visit',
-      components: { default: Visit },
+      path: 'visits',
+      name: 'Visits',
+      components: { default: Visits },
     },
     {
-      path: 'visit-consults/:id',
+      path: 'visits/:id',
       name: 'EditVisit',
       components: { default: EditVisit },
     },
@@ -267,8 +267,8 @@ let eventMenu = {
   children: [
     {
       path: 'events',
-      name: 'Event',
-      components: { default: Event },
+      name: 'Events',
+      components: { default: Events },
     },
     {
       path: 'events-add',

@@ -3,7 +3,7 @@
 		<template v-for="data in consultData">
 
 			<div class="form-row"
-					 v-if="data.type === 'text' && data.property === 'phoneNumber'">
+					 v-if="data.type === 'text' && data.property === 'customer_phone'">
 				<fg-input class="col-sm-6 col-12"
 									:label="data.label"
 									v-model="data.value"
@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="form-row"
-					 v-else-if="data.type === 'date' && data.property !== 'distributionDate'">
+					 v-else-if="data.type === 'date' && data.property !== 'division_at'">
 				<fg-input class="col-sm-6 col-12"
 									:label="data.label"
 									v-model="data.value"
@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="form-row"
-					 v-else-if="data.type === 'checkbox'">
+					 v-else-if="data.type === 'checkbox' && data.property !== 'division_complete'">
 				<div class="form-group col-sm-6 col-12 has-label">
 					<label>{{ data.label }}</label>
 					<div>
@@ -120,7 +120,8 @@ export default {
 	async created() {
 		const { data } = await getDetailData(this.url, this.$route.params.id);
 		this.consultData = this.consultData.map((item) => {
-			if (item.type === 'date') {
+			if (item.property === 'division_at') return item;
+			else if (item.type === 'date') {
 				const value = convertDate(data.result[item.property]);
 				return {
 					...item,

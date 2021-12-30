@@ -1,8 +1,9 @@
 <template>
-	<ShowDBTable title="견적문의 상담접수 목록"
+	<ShowDBTable title="방문상담 상담접수 목록"
 							 :url="url"
 							 :index="index"
-							 routerName="EditEstimateInquiries"
+							 routerName="EditVisit"
+							 arrayName="visitResList"
 	></ShowDBTable>
 </template>
 
@@ -11,14 +12,14 @@ import ShowDBTable from './ShowDBTable';
 import tableIndex from 'src/assets/data';
 
 export default {
-	name: 'EstimateInquiries',
+	name: 'Visit',
 	components: {
 		ShowDBTable,
 	},
 	data() {
 		return {
-			url: 'estimate-inquiries',
-			index: tableIndex.estimateInquiries,
+			url: 'visits',
+			index: tableIndex.visit,
 		};
 	}
 };

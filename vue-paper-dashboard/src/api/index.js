@@ -10,45 +10,44 @@ function createInstance() {
 
 const instance = createInstance();
 
-function getData(url) {
-  return instance.get(`${url}/list`);
+function getData(url, startDate, endDate, page = 1) {
+  if (url === 'events') {
+    return instance.get(`api/${url}`, {
+      params: { startDate, endDate, page }
+    })
+  } else return instance.get(`api/${url}/list`, {
+    params: { startDate, endDate, page, },
+  });
 }
 
 function addData(url, data) {
-  return instance.post(`${url}`, {
+  return instance.post(`api/${url}`, {
     ...data,
   });
 }
 
 function deleteData(url, id) {
-  return instance.delete(`${url}/${id}`);
+  if (url === 'events') {
+    return instance.delete(`api/events`, { data: { id: [id] } })
+  } else return instance.delete(`api/${url}/${id}`);
 }
 
 function updateData(url, id, updatedData) {
-  return instance.patch(`${url}/${id}`, {
+  return instance.patch(`api/${url}/${id}`, {
     ...updatedData,
   });
 }
 
-function filterData(url, startDate, endDate) {
-  return instance.get(`${url}/list`, {
-    params: {
-      startDate,
-      endDate,
-    },
-  });
-}
-
 function getDetailData(url, id) {
-  return instance.get(`${url}/${id}`);
+  return instance.get(`api/${url}/${id}`);
 }
 
 function completeDistribution(url, id) {
-  return instance.patch(`${url}/distribution/${id}`);
+  return instance.patch(`api/${url}/distribution/${id}`);
 }
 
 function endPosting(url, id) {
-  return instance.delete(`${url}/${id}`);
+  return instance.delete(`api/${url}/${id}`);
 }
 
-export { getData, addData, deleteData, updateData, filterData, getDetailData, completeDistribution, endPosting };
+export { getData, addData, deleteData, updateData, getDetailData, completeDistribution, endPosting };

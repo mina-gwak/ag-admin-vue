@@ -3,10 +3,10 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="mt-2 mb-4 col-sm-12 card-header">
-					<h5 class="title">견적문의 상담내역 수정</h5>
+					<h5 class="title">카카오톡 상담내역 수정</h5>
 				</div>
 				<div class="card-body">
-					<EditForm page="estimateInquiries"></EditForm>
+					<EditForm page="kakao"></EditForm>
 				</div>
 			</div>
 		</div>
@@ -18,7 +18,7 @@ import { FgInput, Checkbox, Select, Radio } from 'src/components/UIComponents';
 import EditForm from './EditForm';
 
 export default {
-	name: 'EditEstimateInquiries',
+	name: 'EditKakao',
 	components: {
 		FgInput,
 		Checkbox,

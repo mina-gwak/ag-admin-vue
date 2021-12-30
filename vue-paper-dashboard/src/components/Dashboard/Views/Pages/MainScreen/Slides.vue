@@ -57,24 +57,16 @@ export default {
 		};
 	},
 	methods: {
-		async getConsultData() {
+		async setData() {
 			try {
 				const { data } = await getData(this.url);
-				this.setIdx(data.result);
+				this.consultData = data.result.slideListResList;
 			} catch (error) {
 				console.log(error.response);
 			}
 		},
 		changeSelection(selections) {
 			this.selections = selections;
-		},
-		setIdx(result) {
-			this.consultData = result.map((item) => {
-				return {
-					...item,
-					idx: item.slideIdx,
-				};
-			});
 		},
 		async endPosting() {
 			try {
@@ -85,12 +77,12 @@ export default {
 						const response = await endPosting(this.url, this.selections[i].idx);
 						if (response.data.status !== '200') {
 							alert(response.data.message);
-							await this.getConsultData();
+							await this.setData();
 							return;
 						}
 					}
 					alert('배분완료되었습니다');
-					await this.getConsultData();
+					await this.setData();
 				}
 			} catch (error) {
 				console.log(error.message);
@@ -112,14 +104,14 @@ export default {
 
 			if (this.selections.length > 1) {
 				alert('한 개의 상담내역만 선택해주세요');
-				await this.getConsultData();
+				await this.setData();
 				return;
 			}
 
 			await router.push({
 				name: 'EditSlides',
 				params: {
-					id: this.selections[0].idx,
+					id: this.selections[0].id,
 				},
 			});
 		},
@@ -130,7 +122,7 @@ export default {
 		},
 	},
 	created() {
-		this.getConsultData();
+		this.setData();
 	},
 	computed: {
 		changeSelect() {

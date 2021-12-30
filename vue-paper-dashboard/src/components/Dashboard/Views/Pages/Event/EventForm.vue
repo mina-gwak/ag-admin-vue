@@ -10,7 +10,7 @@
 
 		<div class="form-row">
 			<label class="col-12">이벤트 썸네일</label>
-			<ImageUploader property="thumbnail" :data-props="eventData" @handle-change="handleChange"></ImageUploader>
+			<ImageUploader property="mainImagePath" :data-props="eventData" @handle-change="handleChange"></ImageUploader>
 		</div>
 
 		<div class="form-row">
@@ -35,7 +35,7 @@
 			<div class="date-container col-5">
 				<label class="demonstration">시작일</label>
 				<el-date-picker
-						v-model="eventData.startDate"
+						v-model="eventData.startAt"
 						type="date"
 						size="small"
 						class="date-picker"
@@ -47,7 +47,7 @@
 			<div class="date-container col-5">
 				<label class="demonstration">종료일</label>
 				<el-date-picker
-						v-model="eventData.endDate"
+						v-model="eventData.endAt"
 						type="date"
 						size="small"
 						class="date-picker"
@@ -58,7 +58,7 @@
 
 		<div class="form-row">
 			<label class="col-12">이벤트 상세페이지 적용 이미지</label>
-			<ImageUploader property="contentImage" :data-props="eventData" @handle-change="handleChange"></ImageUploader>
+			<ImageUploader property="detailImagePath" :data-props="eventData" @handle-change="handleChange"></ImageUploader>
 		</div>
 
 		<div class="button-group">
@@ -97,14 +97,23 @@ export default {
 			const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 13);
 			return [startDate, endDate];
 		},
+		checkStatus(startDate, endDate) {
+			const start = new Date(startDate);
+			const end = new Date(endDate);
+			const today = new Date();
+			if (today < start) return 'STAND_BY';
+			if (today >= start && today <= end) return 'PROCEEDING';
+			if (today > end) return 'PROCEEDING';
+		},
 		async onSubmit(event) {
 			const saveType = event.target.textContent === '임시저장' ? 'TEMPORARY' : 'SAVE';
-
+			const eventStatus = this.checkStatus(this.eventData.startAt, this.eventData.endAt);
 			const updatedData = {
 				...this.eventData,
-				startDate: this.eventData.startDate ? convertDate(this.eventData.startDate) : '',
-				endDate: this.eventData.endDate ? convertDate(this.eventData.endDate) : '',
-				saveType: saveType,
+				startAt: this.eventData.startAt ? convertDate(this.eventData.startAt) : '',
+				endAt: this.eventData.endAt ? convertDate(this.eventData.endAt) : '',
+				saveType,
+				eventStatus,
 			};
 
 			try {
@@ -129,10 +138,10 @@ export default {
 	},
 	created() {
 		if (this.type === '등록') {
-			const [ startDate, endDate ] = this.setDefaultDate();
+			const [ startAt, endAt ] = this.setDefaultDate();
 			this.eventData = {
-				startDate,
-				endDate,
+				startAt,
+				endAt,
 			};
 		}
 	},

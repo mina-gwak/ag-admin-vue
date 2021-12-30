@@ -29,7 +29,21 @@ export default {
 	},
 	async created() {
 		const { data } = await getDetailData('events', this.$route.params.id);
-		this.eventData = data.result;
+		let newData = data.result;
+		for (let key in data.result) {
+			if (key === 'mainImage') {
+				newData = {
+					...newData,
+					mainImagePath: data.result[key],
+				}
+			} else if (key === 'detailImage') {
+				newData = {
+					...newData,
+					detailImagePath: data.result[key],
+				}
+			}
+		}
+		this.eventData = newData;
 	},
 };
 </script>
