@@ -3,7 +3,6 @@
 							 :url="url"
 							 :index="index"
 							 routerName="EditEstimate"
-							 arrayName="estimateInquiryResList"
 	></ShowDBTable>
 </template>
 

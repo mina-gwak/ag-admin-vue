@@ -3,7 +3,6 @@
 							 :url="url"
 							 :index="index"
 							 routerName="EditVisit"
-							 arrayName="visitResList"
 	></ShowDBTable>
 </template>
 

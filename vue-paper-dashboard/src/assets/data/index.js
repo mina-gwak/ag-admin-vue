@@ -2,59 +2,59 @@ const tableIndex = {
   kakao: [
     {
       label: '접수일자',
-      property: 'created_at',
+      property: 'createdAt',
       type: 'date',
     },
     {
       label: '카카오톡ID',
-      property: 'kakao_id',
+      property: 'kakaoId',
       type: 'text',
     },
     {
       label: '문의차량',
-      property: 'car_name',
+      property: 'carName',
       type: 'text',
     },
     {
       label: '배분여부',
-      property: 'division_complete',
+      property: 'divisionComplete',
       type: 'checkbox',
     },
     {
       label: '배분일자',
-      property: 'division_at',
+      property: 'divisionAt',
       type: 'date',
     },
   ],
   estimate: [
     {
       label: '접수일자',
-      property: 'created_at',
+      property: 'createdAt',
       type: 'date',
     },
     {
       label: '이름',
-      property: 'customer_name',
+      property: 'customerName',
       type: 'text',
     },
     {
       label: '전화번호',
-      property: 'customer_phone',
+      property: 'customerPhone',
       type: 'text',
     },
     {
       label: '렌트 / 리스',
-      property: 'purchase_type',
+      property: 'purchaseType',
       type: 'select',
     },
     {
       label: '상담가능시간',
-      property: 'cont_time',
+      property: 'contTime',
       type: 'select',
     },
     {
       label: '상품',
-      property: 'location_type',
+      property: 'locationType',
       type: 'select',
     },
     {
@@ -64,44 +64,44 @@ const tableIndex = {
     },
     {
       label: '상담방식',
-      property: 'consult_type',
+      property: 'consultType',
       type: 'checkbox',
     },
     {
       label: '개인정보취급',
-      property: 'personal_info_check',
+      property: 'personalInfoCheck',
       type: 'checkbox',
     },
     {
       label: '마케팅',
-      property: 'marketing_info_check',
+      property: 'marketingInfoCheck',
       type: 'checkbox',
     },
     {
       label: '배분여부',
-      property: 'division_complete',
+      property: 'divisionComplete',
       type: 'checkbox',
     },
     {
       label: '배분일자',
-      property: 'division_at',
+      property: 'divisionAt',
       type: 'date',
     },
   ],
   visit: [
     {
       label: '요청일시',
-      property: 'created_at',
+      property: 'createdAt',
       type: 'date',
     },
     {
       label: '이름',
-      property: 'customer_name',
+      property: 'customerName',
       type: 'text',
     },
     {
       label: '전화번호',
-      property: 'customer_phone',
+      property: 'customerPhone',
       type: 'text',
     },
     {
@@ -111,17 +111,17 @@ const tableIndex = {
     },
     {
       label: '개인정보',
-      property: 'personal_info_check',
+      property: 'personalInfoCheck',
       type: 'checkbox',
     },
     {
       label: '마케팅',
-      property: 'marketing_info_check',
+      property: 'marketingInfoCheck',
       type: 'checkbox',
     },
     {
       label: '배분여부',
-      property: 'division_complete',
+      property: 'divisionComplete',
       type: 'checkbox',
     },
   ],
@@ -151,13 +151,13 @@ const tableIndex = {
     },
     {
       label: '게시시작일',
-      property: 'start_at',
+      property: 'startAt',
       type: 'date',
       hide: false,
     },
     {
       label: '게시종료일',
-      property: 'end_at',
+      property: 'endAt',
       type: 'date',
       hide: false,
     },

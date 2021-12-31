@@ -40,7 +40,6 @@ export default {
 		url: String,
 		index: Array,
 		routerName: String,
-		arrayName: String,
 	},
 	components: {
 		Table,
@@ -64,7 +63,7 @@ export default {
 		async setData() {
 			try {
 				const { data } = await getData(this.url, ...this.date);
-				this.consultData = data.result[this.arrayName];
+				this.consultData = data.result.consultList;
 			} catch (error) {
 				console.log(error.response);
 			}

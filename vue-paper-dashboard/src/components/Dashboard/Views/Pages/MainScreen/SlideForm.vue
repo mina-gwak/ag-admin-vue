@@ -27,7 +27,7 @@
 			<div class="date-container col-5">
 				<label class="demonstration">시작일</label>
 				<el-date-picker
-						v-model="slideData['start_at']"
+						v-model="slideData.startAt"
 						type="date"
 						size="small"
 						class="date-picker"
@@ -39,7 +39,7 @@
 			<div class="date-container col-5">
 				<label class="demonstration">종료일</label>
 				<el-date-picker
-						v-model="slideData['end_at']"
+						v-model="slideData.endAt"
 						type="date"
 						size="small"
 						class="date-picker"
@@ -93,8 +93,8 @@ export default {
 
 			const updatedData = {
 				...this.slideData,
-				'start_at': this.slideData['start_at'] ? convertDate(this.slideData['start_at']) : '',
-				'end_at': this.slideData['end_at'] ? convertDate(this.slideData['end_at']) : '',
+				startAt: this.slideData.startAt ? convertDate(this.slideData.startAt) : '',
+				endAt: this.slideData.endAt ? convertDate(this.slideData.endAt) : '',
 				status: status,
 			};
 
@@ -122,8 +122,8 @@ export default {
 		if (this.type === '등록') {
 			const [ startDate, endDate ] = this.setDefaultDate();
 			this.slideData = {
-				'start_at': startDate,
-				'end_at': endDate,
+				startAt: startDate,
+				endAt: endDate,
 			};
 		}
 	},

@@ -3,7 +3,6 @@
 							 :url="url"
 							 :index="index"
 							 routerName="EditKakao"
-							 array-name="kakaoConsultResList"
 	></ShowDBTable>
 </template>
 

@@ -1,5 +1,5 @@
 const options = {
-  'purchase_type': [
+  'purchaseType': [
     {
       label: '장기렌트',
       value: 'RENT',
@@ -9,7 +9,7 @@ const options = {
       value: 'LEASE',
     }
   ],
-  'cont_time': [
+  'contTime': [
     {
       label: 'All time',
       value: 'All time',
@@ -79,7 +79,7 @@ const options = {
       value: '24시',
     },
   ],
-  'location_type': [
+  'locationType': [
     {
       label: '메인화면',
       value: '메인화면',
@@ -105,7 +105,7 @@ const options = {
       value: '프로모션',
     },
   ],
-  'consult_type': [
+  'consultType': [
     {
       label: '카카오톡',
       value: 'KAKAO',
